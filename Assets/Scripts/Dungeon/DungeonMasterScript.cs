@@ -14,6 +14,7 @@ public class DungeonMasterScript : MonoBehaviour
     private List<Vector2> currentTuiles, prevTuiles, nextTuiles, neighboringTuiles; //Utilisees par l'algo de distance au joueur, respectivement :
                                                                                     //les tuiles en cours de traitement, celles deja traitees, celles traitees a la prochaine iteration, celles renvoyees par la tuile en cours
     private int currentInt; //Pour stocker un entier temporaire
+    private List<ASkeletonDecisionScript> skeletonList; //Tous les squelettes presents dans notre niveau
 
     private void Start()
     {
@@ -49,6 +50,12 @@ public class DungeonMasterScript : MonoBehaviour
         solDonjon = sd;
         levelWidth = lw;
         levelHeight = lh;
+    }
+
+    public void ReceiveSkeletons(List<ASkeletonDecisionScript> sl)
+    {
+        skeletonList = sl;
+        foreach (ASkeletonDecisionScript skeleton in skeletonList) skeleton.ReceiveDungeonMaster(this);
     }
 
     /// <summary>
@@ -88,7 +95,24 @@ public class DungeonMasterScript : MonoBehaviour
         } while (currentTuiles.Count != 0);
 
         //On peut lancer la suite de la boucle de gameplay
+        SkeletonDecisions();
+    }
+
+    private void SkeletonDecisions()
+    {
+        foreach (ASkeletonDecisionScript skeleton in skeletonList) skeleton.DecisionMaking();
+        
+        //On peut lancer la suite de la boucle de gameplay
         AllowPlayerMovement(true);
+    }
+
+    public int GetTuileDistance(int x, int y) => solDonjon[x, y].GetDistance();
+
+    public List<Vector2> GetTuileNeighbors(int x, int y) => solDonjon[x, y].GetVoisins();
+
+    public void ChangeTuileColor(int x, int y, bool i)
+    {
+        solDonjon[x, y].ChangeColor(i);
     }
 
     /// <summary>
@@ -141,6 +165,15 @@ public class DungeonMasterScript : MonoBehaviour
     /// </summary>
     public void PlayerHasMoved()
     {
-        AllowPlayerMovement(true);
+        //On peut lancer la suite de la boucle de gameplay
+        TuilesReset();
+    }
+
+    private void TuilesReset()
+    {
+        for(int i = 0; i < levelWidth; i++) for(int j = 0; j < levelHeight; j++) if (solDonjon[i, j] != null) solDonjon[i, j].ResetColor();
+
+        //On peut lancer la suite de la boucle de gameplay
+        PlayerDistance();
     }
 }

@@ -19,6 +19,8 @@ public class DungeonBuilderScript : MonoBehaviour
     private Vector2 playerPosition, stairsPosition; //Position du debut et de la fin
     private List<Vector2> holesPositions, enemyPositions, treasuresPositions; //Liste des trous dans le niveau
     private FloorScript[,] tuiles; //La liste des dalles qui composent notre sol
+    private List<ASkeletonDecisionScript> skeletonList; //La liste des squelettes dans le niveau
+    private DungeonMasterScript dungeonMasterScript;
 
     /// <summary>
     /// La fonction chargee d'assembler les donnes du planner pour avoir un vrai donjon
@@ -84,7 +86,8 @@ public class DungeonBuilderScript : MonoBehaviour
 
         //On place le joueur
         currentGameObject = GameObject.Instantiate(PlayerPrefab, new Vector3(playerPosition.x, 0, playerPosition.y), Quaternion.identity, CurrentFloor.transform);
-        GetComponent<DungeonMasterScript>().ReceivePlayer(currentGameObject);
+        dungeonMasterScript = GetComponent<DungeonMasterScript>();
+        dungeonMasterScript.ReceivePlayer(currentGameObject);
     }
 
     /// <summary>
@@ -108,7 +111,7 @@ public class DungeonBuilderScript : MonoBehaviour
         }
 
         //On communique les tuiles au maitre du donjon
-        GetComponent<DungeonMasterScript>().ReceiveFloor(tuiles, levelWidth, levelHeight);
+        dungeonMasterScript.ReceiveFloor(tuiles, levelWidth, levelHeight);
     }
 
     /// <summary>
@@ -116,7 +119,13 @@ public class DungeonBuilderScript : MonoBehaviour
     /// </summary>
     private void PlaceEnemies()
     {
-        foreach (Vector2 enemy in enemyPositions) GameObject.Instantiate(MeleeSkeletonPrefab, new Vector3(enemy.x, 0, enemy.y), Quaternion.identity, CurrentFloor.transform);
+        skeletonList = new List<ASkeletonDecisionScript>();
+        foreach (Vector2 enemy in enemyPositions)
+        {
+            currentGameObject =  GameObject.Instantiate(MeleeSkeletonPrefab, new Vector3(enemy.x, 0, enemy.y), Quaternion.identity, CurrentFloor.transform);
+            skeletonList.Add(currentGameObject.GetComponent<ASkeletonDecisionScript>());
+        }
+        dungeonMasterScript.ReceiveSkeletons(skeletonList);
     }
 
     /// <summary>

@@ -99,4 +99,8 @@ public class FloorScript : MonoBehaviour
         distance = d;
         return voisins;
     }
+
+    public int GetDistance() => distance;
+
+    public List<Vector2> GetVoisins() => voisins;
 }

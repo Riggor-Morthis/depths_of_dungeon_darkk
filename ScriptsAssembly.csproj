@@ -62,6 +62,8 @@
     <Compile Include="Assets\Scripts\Dungeon\DungeonMasterScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonPlannerScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementScript.cs" />
+    <Compile Include="Assets\Scripts\Skeletons\MeleeDecisionScript.cs" />
+    <Compile Include="Assets\Scripts\Skeletons\ASkeletonDecisionScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\ScriptsAssembly.asmdef" />
