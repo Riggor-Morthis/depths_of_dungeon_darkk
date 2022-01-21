@@ -9,7 +9,7 @@ public class FloorScript : MonoBehaviour
     MeshRenderer meshRenderer;
     bool altered; //Est-ce que la couleur de la tuile a ete alteree
     List<Vector2> voisins; //La liste des voisins de la tuile
-    int distance; //Instance actuelle au joueur (manhattan)
+    int distance = 0; //Instance actuelle au joueur (manhattan)
     Color couleurPair = new Color(173f / 255, 199f / 255, 204f / 255),
         couleurImpair = new Color(145f / 255, 170f / 255, 194f / 255),
         couleurEnd = new Color(161f / 255, 188f / 255, 201f / 255),
@@ -25,6 +25,7 @@ public class FloorScript : MonoBehaviour
     {
         //Initialisation de variable
         altered = false;
+        voisins = new List<Vector2>();
         //On recupere le mesh renderer et on lui file la bonne couleur
         meshRenderer = GetComponentInChildren<MeshRenderer>();
         if (endTile) color = new Color(161f / 255, 188f / 255, 201f / 255);
@@ -77,5 +78,25 @@ public class FloorScript : MonoBehaviour
     {
         ChangeColor(color);
         altered = false;
+    }
+
+    /// <summary>
+    /// Permet d'ajouter un voisin dans la liste
+    /// </summary>
+    /// <param name="v">Le script voisin de celui-ci</param>
+    public void AddNeighbor(Vector2 v)
+    {
+        voisins.Add(v);
+    }
+
+    /// <summary>
+    /// Recoit la distance au joueur, et donne la liste de ses voisins en echange
+    /// </summary>
+    /// <param name="d">La distance au joueur</param>
+    /// <returns>La liste des voisins de la tuile</returns>
+    public List<Vector2> SetDistance(int d)
+    {
+        distance = d;
+        return voisins;
     }
 }

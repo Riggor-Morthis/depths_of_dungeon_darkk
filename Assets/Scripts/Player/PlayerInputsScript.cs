@@ -8,7 +8,7 @@ public class PlayerInputsScript : MonoBehaviour
     private DungeonMasterScript dungeonMasterScript;
     private Vector2 startingMousePosition, endingMousePosition;
     private float mouseAngle;
-    private Vector3 moveInput;
+    private Vector3 moveInput = Vector3.forward;
 
     private void Update()
     {
@@ -32,12 +32,11 @@ public class PlayerInputsScript : MonoBehaviour
         mouseAngle = Vector2.SignedAngle(endingMousePosition - startingMousePosition, Vector2.up);
 
         //On sert de l'angle pour deduire quel vecteur unitaire le joueur a forme
-        if (Mathf.Abs(mouseAngle) < 45) moveInput = Vector3.forward;
-        else if (Mathf.Abs(mouseAngle) > 135) moveInput = Vector3.back;
-        else
+        if (Mathf.Abs(mouseAngle) > 135) moveInput = -moveInput;
+        else if(Mathf.Abs(mouseAngle) >= 45)
         {
-            if (mouseAngle >= 0) moveInput = Vector3.right;
-            else moveInput = Vector3.left;
+            if (mouseAngle >= 0) moveInput = new Vector3(moveInput.z, 0, -moveInput.x);
+            else moveInput = new Vector3(-moveInput.z, 0, moveInput.x);
         }
 
         //On communique l'input

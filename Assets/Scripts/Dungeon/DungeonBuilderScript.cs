@@ -27,6 +27,7 @@ public class DungeonBuilderScript : MonoBehaviour
     {
         GetPlannedFloor();
         BuildFloor();
+        LinkNeighbors();
         PlaceEnemies();
         PlaceTreasures();
     }
@@ -84,8 +85,30 @@ public class DungeonBuilderScript : MonoBehaviour
         //On place le joueur
         currentGameObject = GameObject.Instantiate(PlayerPrefab, new Vector3(playerPosition.x, 0, playerPosition.y), Quaternion.identity, CurrentFloor.transform);
         GetComponent<DungeonMasterScript>().ReceivePlayer(currentGameObject);
-        //On communique les tuiles au sol
-        GetComponent<DungeonMasterScript>().ReceiveFloor(tuiles);
+    }
+
+    /// <summary>
+    /// Permet d'indiquer a chaque tuile qui sont ses voisins
+    /// </summary>
+    private void LinkNeighbors()
+    {
+        //On ajoute les voisins si ils existent
+        for (int i = 0; i < levelWidth; i++)
+        {
+            for (int j = 0; j < levelHeight; j++)
+            {
+                if(tuiles[i,j] != null)
+                {
+                    if (i - 1 >= 0 && tuiles[i - 1, j] != null) tuiles[i, j].AddNeighbor(new Vector2(i - 1, j));
+                    if (i + 1 <= levelWidth - 1 && tuiles[i + 1, j] != null) tuiles[i, j].AddNeighbor(new Vector2(i + 1, j));
+                    if (j - 1 >= 0 && tuiles[i, j - 1] != null) tuiles[i, j].AddNeighbor(new Vector2(i, j - 1));
+                    if (j + 1 <= levelHeight - 1 && tuiles[i, j + 1] != null) tuiles[i, j].AddNeighbor(new Vector2(i, j + 1));
+                }
+            }
+        }
+
+        //On communique les tuiles au maitre du donjon
+        GetComponent<DungeonMasterScript>().ReceiveFloor(tuiles, levelWidth, levelHeight);
     }
 
     /// <summary>

@@ -5,18 +5,22 @@ using UnityEngine;
 public class DungeonMasterScript : MonoBehaviour
 {
     //Privates
-    private GameObject playerGameObject;
-    private PlayerInputsScript playerInputScript;
-    private PlayerMovementScript playerMovementScript;
-    private Vector3 playerMoveInput;
-    private FloorScript[,] solDonjon;
+    private GameObject playerGameObject; //Pour stocker le joueur
+    private PlayerInputsScript playerInputScript; //Script d'inputs joueur
+    private PlayerMovementScript playerMovementScript; //Script de mouvement joueur
+    private Vector3 playerMoveInput; //La direction que le joueur veut prendre
+    private FloorScript[,] solDonjon; //Les tuiles de notre donjon pour verifier les deplacements
+    private int levelWidth, levelHeight; //Les dimensions du donjon
+    private List<Vector2> currentTuiles, prevTuiles, nextTuiles, neighboringTuiles; //Utilisees par l'algo de distance au joueur, respectivement :
+                                                                                    //les tuiles en cours de traitement, celles deja traitees, celles traitees a la prochaine iteration, celles renvoyees par la tuile en cours
+    private int currentInt; //Pour stocker un entier temporaire
 
     private void Start()
     {
         //Pour commencer, on genere un donjon
         GetComponent<DungeonBuilderScript>().DungeonBuilder();
-        //On peut lancer la premiere fonction de la boucle de gameplay
-        AllowPlayerMovement(true);
+        //On demande ensuite a la grille de gerer la distance au joueur
+        PlayerDistance();
     }
 
     /// <summary>
@@ -33,15 +37,58 @@ public class DungeonMasterScript : MonoBehaviour
         AllowPlayerMovement(false);
         //Le script de mouvement joueur
         playerMovementScript = playerGameObject.GetComponent<PlayerMovementScript>();
+        playerMovementScript.ReceiveDungeonMaster(this);
     }
 
     /// <summary>
     /// Permet de recevoir une copie du tableau de tuiles qui compose notre sol
     /// </summary>
     /// <param name="sd">La liste des tuiles qui composent notre sol</param>
-    public void ReceiveFloor(FloorScript[,] sd)
+    public void ReceiveFloor(FloorScript[,] sd, int lw, int lh)
     {
         solDonjon = sd;
+        levelWidth = lw;
+        levelHeight = lh;
+    }
+
+    /// <summary>
+    /// Attribue la distance au joueur a chaque tuile (pour les decisions de monstres)
+    /// </summary>
+    private void PlayerDistance()
+    {
+        //On reinitialise les variables
+        currentTuiles = new List<Vector2>();
+        nextTuiles = new List<Vector2>();
+        prevTuiles = new List<Vector2>();
+        neighboringTuiles = new List<Vector2>();
+        currentInt = 0;
+
+        //On amorce la boucle
+        currentTuiles.Add(new Vector2(playerGameObject.transform.position.x, playerGameObject.transform.position.z));
+        //La boucle
+        do
+        {
+            //Tant qu'on a des tuiles a traiter, on va tourner
+            nextTuiles.Clear();
+            //On s'interesse a toutes les tuiles actuellement dans la pile
+            foreach (Vector2 tuile in currentTuiles)
+            {
+                //On donne la distance et on recupere les voisins
+                neighboringTuiles = solDonjon[(int)tuile.x, (int)tuile.y].SetDistance(currentInt);
+                //Si on a encore jamais traite ce voisin, on l'ajoute a la pile
+                foreach (Vector2 voisin in neighboringTuiles) if (!currentTuiles.Contains(voisin) && !prevTuiles.Contains(voisin) && !nextTuiles.Contains(voisin)) nextTuiles.Add(voisin);
+            }
+            //On fait les echanges qu'il faut
+            prevTuiles.AddRange(currentTuiles);
+            currentTuiles.Clear();
+            currentTuiles.AddRange(nextTuiles);
+
+            //On oublie pas d'incrementer la distance
+            currentInt++;
+        } while (currentTuiles.Count != 0);
+
+        //On peut lancer la suite de la boucle de gameplay
+        AllowPlayerMovement(true);
     }
 
     /// <summary>
@@ -62,16 +109,23 @@ public class DungeonMasterScript : MonoBehaviour
         playerMoveInput = pi;
         //On desactive les inputs (conflit) puis on verifie que le deplacement est legal
         AllowPlayerMovement(false);
-        CheckMovementLegality();
+        if (CheckMovementLegality()) OrderPlayerMovement();
+        else AllowPlayerMovement(true);
     }
 
     /// <summary>
     /// Permet de s'assurer que le mouvement est legal (on finit pas dans le vide, on va se mettre a la place d'un squelette)
     /// </summary>
-    private void CheckMovementLegality()
+    private bool CheckMovementLegality()
     {
-        if (solDonjon[(int)(playerGameObject.transform.position.x + playerMoveInput.x), (int)(playerGameObject.transform.position.z + playerMoveInput.z)] != null) OrderPlayerMovement();
-        else AllowPlayerMovement(true);
+        if(playerGameObject.transform.position.x + playerMoveInput.x >= 0 && playerGameObject.transform.position.x + playerMoveInput.x < levelWidth)
+        {
+            if(playerGameObject.transform.position.z + playerMoveInput.z >= 0 && playerGameObject.transform.position.z + playerMoveInput.z < levelHeight)
+            {
+                if (solDonjon[(int)(playerGameObject.transform.position.x + playerMoveInput.x), (int)(playerGameObject.transform.position.z + playerMoveInput.z)] != null) return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>
@@ -80,6 +134,13 @@ public class DungeonMasterScript : MonoBehaviour
     private void OrderPlayerMovement()
     {
         playerMovementScript.ReceiveMoveInstruction(playerMoveInput);
+    }
+
+    /// <summary>
+    /// Le joueur a fini son mouvement et on peut donc passer a la suite
+    /// </summary>
+    public void PlayerHasMoved()
+    {
         AllowPlayerMovement(true);
     }
 }
