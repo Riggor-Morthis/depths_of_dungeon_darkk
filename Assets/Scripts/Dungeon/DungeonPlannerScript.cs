@@ -30,7 +30,7 @@ public class DungeonPlannerScript : MonoBehaviour
     /// <summary>
     /// Genere les elements essentiels pour notre donjon : des coordonnees, un joueur et une sortie
     /// </summary>
-    static void BasicGenerator()
+    private static void BasicGenerator()
     {
         //On commence par determiner les dimensions du niveau
         levelWidth = 15 + (Random.Range(0, 10) * 2);
@@ -44,7 +44,7 @@ public class DungeonPlannerScript : MonoBehaviour
     /// <summary>
     /// Permet de generer des groupes de trous dans notre niveau
     /// </summary>
-    static void HolesGenerator()
+    private static void HolesGenerator()
     {
         //Le nombre de trous qu'on va placer dans notre niveau
         budget = (int)(Random.Range(0.25f, 0.5f) * (levelHeight * levelWidth));
@@ -83,7 +83,7 @@ public class DungeonPlannerScript : MonoBehaviour
     /// <summary>
     /// S'assure que le niveau est finissable, de maniere tres brutale (on fait des chemins en L entre la sortie et le joueur)
     /// </summary>
-    static void ProblemSolver()
+    private static void ProblemSolver()
     {
         //On commence par nettoyer les chemins horizontaux
         for(int i = Mathf.Min((int)playerPosition.x, (int)stairsPosition.x); i < Mathf.Max((int)playerPosition.x, (int)playerPosition.y); i++)
@@ -107,7 +107,7 @@ public class DungeonPlannerScript : MonoBehaviour
     /// <summary>
     /// Place des ennemis aleatoirement dans notre niveau
     /// </summary>
-    static void EnemiesGenerator()
+    private static void EnemiesGenerator()
     {
         //Combien d'ennemis on va avoir dans notre niveau
         budget = (int)(Random.Range(0.01f, 0.03f) * (levelHeight * levelWidth)) + 1;
@@ -144,7 +144,7 @@ public class DungeonPlannerScript : MonoBehaviour
     /// <summary>
     /// Place des tresors aleatoirement dans notre niveau
     /// </summary>
-    static void TreasuresGenerator()
+    private static void TreasuresGenerator()
     {
         //Combien de tresors on veut dans notre donjon
         budget = (int)(0.02f * (levelHeight * levelWidth));

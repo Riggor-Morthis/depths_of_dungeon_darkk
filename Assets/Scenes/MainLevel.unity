@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291006013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1002777, y: -3.3574095, z: 4.9480042}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -162,6 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2028384067}
+  - component: {fileID: 2028384070}
   - component: {fileID: 2028384068}
   - component: {fileID: 2028384069}
   m_Layer: 0
@@ -216,3 +217,15 @@ MonoBehaviour:
   DungeonStairsPrefab: {fileID: 8669931978653031305, guid: b7e645ea60c442f43835c4fbef12b033, type: 3}
   TreasurePrefab: {fileID: 3345756961342550318, guid: aa807809d8077634199e1a2bb4f650a2, type: 3}
   CurrentFloor: {fileID: 1291006013}
+--- !u!114 &2028384070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028384066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994684bdecbfaf64483348a6d792c156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

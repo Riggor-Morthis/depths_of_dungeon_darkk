@@ -14,20 +14,16 @@ public class DungeonBuilderScript : MonoBehaviour
 
     //Privates
     private Vector2 currentVector2; //Stocke un vecteur temporaire
-    private Vector3 currentVector3; //cf. au dessus
+    private GameObject currentGameObject; //Stocker un game object temporairement
     private int levelWidth, levelHeight; //Taille du niveau
     private Vector2 playerPosition, stairsPosition; //Position du debut et de la fin
     private List<Vector2> holesPositions, enemyPositions, treasuresPositions; //Liste des trous dans le niveau
-
-    private void Awake()
-    {
-        DungeonBuilder();
-    }
+    private FloorScript[,] tuiles; //La liste des dalles qui composent notre sol
 
     /// <summary>
     /// La fonction chargee d'assembler les donnes du planner pour avoir un vrai donjon
     /// </summary>
-    private void DungeonBuilder()
+    public void DungeonBuilder()
     {
         GetPlannedFloor();
         BuildFloor();
@@ -58,6 +54,8 @@ public class DungeonBuilderScript : MonoBehaviour
     /// </summary>
     private void BuildFloor()
     {
+        //Initialisation de variables
+        tuiles = new FloorScript[levelWidth,levelHeight];
         //On construit la base du niveau
         for(int i = 0; i < levelWidth; i++)
         {
@@ -66,14 +64,28 @@ public class DungeonBuilderScript : MonoBehaviour
                 currentVector2 = new Vector2(i, j);
                 if (!holesPositions.Contains(currentVector2))
                 {
-                    if(currentVector2 == stairsPosition) GameObject.Instantiate(DungeonStairsPrefab, new Vector3(i, 0, j), Quaternion.identity, CurrentFloor.transform);
-                    else GameObject.Instantiate(DungeonFloorPrefab, new Vector3(i, 0, j), Quaternion.identity, CurrentFloor.transform);
+                    if (currentVector2 == stairsPosition)
+                    {
+                        currentGameObject = GameObject.Instantiate(DungeonStairsPrefab, new Vector3(i, 0, j), Quaternion.identity, CurrentFloor.transform);
+                        currentGameObject.GetComponent<FloorScript>().Initialize((i + j) % 2, true);
+                    }
+                    else
+                    {
+                        currentGameObject = GameObject.Instantiate(DungeonFloorPrefab, new Vector3(i, 0, j), Quaternion.identity, CurrentFloor.transform);
+                        currentGameObject.GetComponent<FloorScript>().Initialize((i + j) % 2, false);
+                    }
+
+                    tuiles[i, j] = currentGameObject.GetComponent<FloorScript>();
                 }
+                else tuiles[i, j] = null;
             }
         }
 
         //On place le joueur
-        GameObject.Instantiate(PlayerPrefab, new Vector3(playerPosition.x, 0, playerPosition.y), Quaternion.identity, CurrentFloor.transform);
+        currentGameObject = GameObject.Instantiate(PlayerPrefab, new Vector3(playerPosition.x, 0, playerPosition.y), Quaternion.identity, CurrentFloor.transform);
+        GetComponent<DungeonMasterScript>().ReceivePlayer(currentGameObject);
+        //On communique les tuiles au sol
+        GetComponent<DungeonMasterScript>().ReceiveFloor(tuiles);
     }
 
     /// <summary>
