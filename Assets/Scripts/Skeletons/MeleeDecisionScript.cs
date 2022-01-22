@@ -10,6 +10,9 @@ public class MeleeDecisionScript : ASkeletonDecisionScript
     private List<Vector2> currentVectors;
     private Vector2 target;
 
+    /// <summary>
+    /// Utiliser pour determiner ce que le squelette fait au prochain tour
+    /// </summary>
     public override void DecisionMaking()
     {
         //Pour commencer, il faut qu'on connaisse notre distance au joueur
@@ -30,23 +33,41 @@ public class MeleeDecisionScript : ASkeletonDecisionScript
         else
         {
             //Est-ce qu'on attaque ou pas ?
-            if (Random.Range(0, 6) <= 6 - currentDisance) intentionAttaque = true;
+            if (currentDisance != 0)
+            {
+                if (Random.Range(0, 0.8f) >= Mathf.Log(currentDisance)) intentionAttaque = true;
+                else intentionAttaque = false;
+            }
             else intentionAttaque = false;
 
             //On recupere les voisins de notre tuile
             currentVectors = dungeonMasterScript.GetTuileNeighbors((int)transform.position.x, (int)transform.position.z);
+            //On initialise nos variables
+            currentDisance = dungeonMasterScript.GetTuileDistance((int)currentVectors[0].x, (int)currentVectors[0].y);
+            target = currentVectors[0];
             //On trouve celui qui nous rapproche du joueur
-            foreach(Vector2 voisin in currentVectors) if(currentDisance >= dungeonMasterScript.GetTuileDistance((int)voisin.x, (int)voisin.y))
+            foreach (Vector2 voisin in currentVectors)
+            {
+                if (currentDisance > dungeonMasterScript.GetTuileDistance((int)voisin.x, (int)voisin.y))
                 {
                     currentDisance = dungeonMasterScript.GetTuileDistance((int)voisin.x, (int)voisin.y);
                     target = voisin;
                 }
+                else if (currentDisance == dungeonMasterScript.GetTuileDistance((int)voisin.x, (int)voisin.y)) if(Random.Range(0,2) == 0)
+                    {
+                        currentDisance = dungeonMasterScript.GetTuileDistance((int)voisin.x, (int)voisin.y);
+                        target = voisin;
+                    }
+            }
         }
 
         //Une fois qu'on a fait un choix, il faut l'afficher
         CommunicateIntent();
     }
 
+    /// <summary>
+    /// Modifie les couleurs de la grille pour l'UI
+    /// </summary>
     private void CommunicateIntent()
     {
         dungeonMasterScript.ChangeTuileColor((int)target.x, (int)target.y, intentionAttaque);

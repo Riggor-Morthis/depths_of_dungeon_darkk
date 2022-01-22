@@ -52,6 +52,10 @@ public class DungeonMasterScript : MonoBehaviour
         levelHeight = lh;
     }
 
+    /// <summary>
+    /// Recoit la liste des squelettes presents dans ce niveau
+    /// </summary>
+    /// <param name="sl">La liste des squelettes qu'on a place dans notre niveau</param>
     public void ReceiveSkeletons(List<ASkeletonDecisionScript> sl)
     {
         skeletonList = sl;
@@ -98,6 +102,9 @@ public class DungeonMasterScript : MonoBehaviour
         SkeletonDecisions();
     }
 
+    /// <summary>
+    /// Ordonne a tous nos squelettes de faire un choix
+    /// </summary>
     private void SkeletonDecisions()
     {
         foreach (ASkeletonDecisionScript skeleton in skeletonList) skeleton.DecisionMaking();
@@ -133,23 +140,37 @@ public class DungeonMasterScript : MonoBehaviour
         playerMoveInput = pi;
         //On desactive les inputs (conflit) puis on verifie que le deplacement est legal
         AllowPlayerMovement(false);
-        if (CheckMovementLegality()) OrderPlayerMovement();
+        if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 1) OrderPlayerMovement();
         else AllowPlayerMovement(true);
     }
 
     /// <summary>
-    /// Permet de s'assurer que le mouvement est legal (on finit pas dans le vide, on va se mettre a la place d'un squelette)
+    /// Permet de savoir le resultat d'un mouvement theorique : 0 pour un mouvement qui est impossible,
+    /// 1 pour un mouvement qui est possible, 2 pour un mouvement qui est impossible mais avec une attaque qui est possible
     /// </summary>
-    private bool CheckMovementLegality()
+    /// <param name="positionInitiale">L'endroit ou se trouve l'entite</param>
+    /// <param name="mouvementDesire">La ou elle veut aller</param>
+    /// <returns>0 si le mouvement est absolument impossible (pas de tuile a cet endroit)
+    ///          1 si le mouvement est absolument possible (personne la ou on va)
+    ///          2 si le mouvement est impossible mais l'attaque est possible (quelqu'un la ou on va)</returns>
+    private int CheckMovementLegality(Vector3 positionInitiale, Vector3 mouvementDesire)
     {
-        if(playerGameObject.transform.position.x + playerMoveInput.x >= 0 && playerGameObject.transform.position.x + playerMoveInput.x < levelWidth)
+        //On commence par s'assurer que le mouvement envoie bien sur une tuile qui existe (dans le tableau et non null)
+        if(positionInitiale.x + mouvementDesire.x >= 0 && positionInitiale.x + mouvementDesire.x < levelWidth)
         {
-            if(playerGameObject.transform.position.z + playerMoveInput.z >= 0 && playerGameObject.transform.position.z + playerMoveInput.z < levelHeight)
+            if(positionInitiale.z + mouvementDesire.y >= 0 && positionInitiale.z + mouvementDesire.y < levelHeight)
             {
-                if (solDonjon[(int)(playerGameObject.transform.position.x + playerMoveInput.x), (int)(playerGameObject.transform.position.z + playerMoveInput.z)] != null) return true;
+                if(solDonjon[(int)(positionInitiale.x + mouvementDesire.x), (int)(positionInitiale.z + mouvementDesire.y)] != null)
+                {
+                    //Maintenant on veut savoir si la tuile est occupee ou non
+                    positionInitiale += mouvementDesire;
+                    if (Vector3.Distance(positionInitiale, playerGameObject.transform.position) < 0.1f) return 2;
+                    else foreach (ASkeletonDecisionScript skeleton in skeletonList) if (Vector3.Distance(positionInitiale, skeleton.transform.position) < 0.1f) return 2;
+                    return 1;
+                }
             }
         }
-        return false;
+        return 0;
     }
 
     /// <summary>
@@ -169,6 +190,9 @@ public class DungeonMasterScript : MonoBehaviour
         TuilesReset();
     }
 
+    /// <summary>
+    /// Remet "a 0" les tuiles de notre grille pour effacer notre UI
+    /// </summary>
     private void TuilesReset()
     {
         for(int i = 0; i < levelWidth; i++) for(int j = 0; j < levelHeight; j++) if (solDonjon[i, j] != null) solDonjon[i, j].ResetColor();

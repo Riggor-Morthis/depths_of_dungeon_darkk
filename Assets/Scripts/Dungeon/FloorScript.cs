@@ -10,11 +10,6 @@ public class FloorScript : MonoBehaviour
     bool altered; //Est-ce que la couleur de la tuile a ete alteree
     List<Vector2> voisins; //La liste des voisins de la tuile
     int distance = 0; //Instance actuelle au joueur (manhattan)
-    Color couleurPair = new Color(173f / 255, 199f / 255, 204f / 255),
-        couleurImpair = new Color(145f / 255, 170f / 255, 194f / 255),
-        couleurEnd = new Color(161f / 255, 188f / 255, 201f / 255),
-        UIcouleurMouvement = new Color(108f / 255, 217f / 255, 126f / 255),
-        UIcouleurAttaque = new Color(217f / 255, 108f / 255, 126f / 255);
 
     /// <summary>
     /// Initialise les couleurs de notre tuile
