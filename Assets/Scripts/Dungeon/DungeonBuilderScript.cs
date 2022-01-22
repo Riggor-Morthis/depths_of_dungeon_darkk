@@ -20,7 +20,8 @@ public class DungeonBuilderScript : MonoBehaviour
     private List<Vector2> holesPositions, enemyPositions, treasuresPositions; //Liste des trous dans le niveau
     private FloorScript[,] tuiles; //La liste des dalles qui composent notre sol
     private List<ASkeletonDecisionScript> skeletonList; //La liste des squelettes dans le niveau
-    private DungeonMasterScript dungeonMasterScript;
+    private List<TreasureScript> treasureList; //La liste des tresors dans le niveau
+    private DungeonMasterScript dungeonMasterScript; //Le maitre de ce donjon
 
     /// <summary>
     /// La fonction chargee d'assembler les donnes du planner pour avoir un vrai donjon
@@ -133,6 +134,12 @@ public class DungeonBuilderScript : MonoBehaviour
     /// </summary>
     private void PlaceTreasures()
     {
-        foreach (Vector2 treasure in treasuresPositions) GameObject.Instantiate(TreasurePrefab, new Vector3(treasure.x, 0f, treasure.y), Quaternion.identity, CurrentFloor.transform);
+        treasureList = new List<TreasureScript>();
+        foreach (Vector2 treasure in treasuresPositions)
+        {
+            currentGameObject = GameObject.Instantiate(TreasurePrefab, new Vector3(treasure.x, 0f, treasure.y), Quaternion.identity, CurrentFloor.transform);
+            treasureList.Add(currentGameObject.GetComponent<TreasureScript>());
+        }
+        dungeonMasterScript.ReceiveTreasures(treasureList);
     }
 }

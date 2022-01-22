@@ -15,6 +15,7 @@ public class DungeonMasterScript : MonoBehaviour
                                                                                     //les tuiles en cours de traitement, celles deja traitees, celles traitees a la prochaine iteration, celles renvoyees par la tuile en cours
     private int currentInt; //Pour stocker un entier temporaire
     private List<ASkeletonDecisionScript> skeletonList; //Tous les squelettes presents dans notre niveau
+    private List<TreasureScript> treasureList; //Tous les tresors presents dans notre niveau
 
     private void Start()
     {
@@ -60,6 +61,15 @@ public class DungeonMasterScript : MonoBehaviour
     {
         skeletonList = sl;
         foreach (ASkeletonDecisionScript skeleton in skeletonList) skeleton.ReceiveDungeonMaster(this);
+    }
+    
+    /// <summary>
+    /// Recoit la liste des tresors dans ce niveau
+    /// </summary>
+    /// <param name="tl">La liste des tresors qu'on a place dans notre niveau</param>
+    public void ReceiveTreasures(List<TreasureScript> tl)
+    {
+        treasureList = tl;
     }
 
     /// <summary>
@@ -158,9 +168,9 @@ public class DungeonMasterScript : MonoBehaviour
         //On commence par s'assurer que le mouvement envoie bien sur une tuile qui existe (dans le tableau et non null)
         if(positionInitiale.x + mouvementDesire.x >= 0 && positionInitiale.x + mouvementDesire.x < levelWidth)
         {
-            if(positionInitiale.z + mouvementDesire.y >= 0 && positionInitiale.z + mouvementDesire.y < levelHeight)
+            if(positionInitiale.z + mouvementDesire.z >= 0 && positionInitiale.z + mouvementDesire.z < levelHeight)
             {
-                if(solDonjon[(int)(positionInitiale.x + mouvementDesire.x), (int)(positionInitiale.z + mouvementDesire.y)] != null)
+                if(solDonjon[(int)(positionInitiale.x + mouvementDesire.x), (int)(positionInitiale.z + mouvementDesire.z)] != null)
                 {
                     //Maintenant on veut savoir si la tuile est occupee ou non
                     positionInitiale += mouvementDesire;
@@ -186,6 +196,20 @@ public class DungeonMasterScript : MonoBehaviour
     /// </summary>
     public void PlayerHasMoved()
     {
+        //On peut lancer la suite de la boucle de gameplay
+        CollectMoney();
+    }
+
+    /// <summary>
+    /// Demande a chacun des tresors dans la scene de savoir si le joueur l'a ramasse ou non
+    /// </summary>
+    private void CollectMoney()
+    {
+        //On inspecte chaque tresor
+        foreach(TreasureScript treasure in treasureList)
+        {
+            if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f) treasure.TreasureCollected();
+        }
         //On peut lancer la suite de la boucle de gameplay
         TuilesReset();
     }

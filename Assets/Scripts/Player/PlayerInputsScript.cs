@@ -9,17 +9,27 @@ public class PlayerInputsScript : MonoBehaviour
     private Vector2 startingMousePosition, endingMousePosition;
     private float mouseAngle;
     private Vector3 moveInput = Vector3.forward;
+    private bool validMouseInput;
+
+    private void Awake()
+    {
+        validMouseInput = false;
+    }
 
     private void Update()
     {
         //Recuperer l'endroit ou on appuie
-        if (Input.GetMouseButtonDown(0)) startingMousePosition = Input.mousePosition;
+        if (Input.GetMouseButtonDown(0))
+        {
+            startingMousePosition = Input.mousePosition;
+            validMouseInput = true;
+        }
 
         //Recuperer l'endroit ou on lache et en profiter pour calculer le vecteur demande
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && validMouseInput)
         {
             endingMousePosition = Input.mousePosition;
-            if(startingMousePosition != null) CalculateMouseVector();
+            CalculateMouseVector();
         }
     }
 
