@@ -117,7 +117,7 @@ public class DungeonMasterScript : MonoBehaviour
     /// </summary>
     private void SkeletonDecisions()
     {
-        foreach (ASkeletonDecisionScript skeleton in skeletonList) skeleton.DecisionMaking();
+        foreach (ASkeletonDecisionScript skeleton in skeletonList) if(skeleton.isActiveAndEnabled) skeleton.DecisionMaking();
         
         //On peut lancer la suite de la boucle de gameplay
         AllowPlayerMovement(true);
@@ -176,7 +176,7 @@ public class DungeonMasterScript : MonoBehaviour
                     //Maintenant on veut savoir si la tuile est occupee ou non
                     positionInitiale += mouvementDesire;
                     if (Vector3.Distance(positionInitiale, playerGameObject.transform.position) < 0.1f) return 2;
-                    else foreach (ASkeletonDecisionScript skeleton in skeletonList) if (Vector3.Distance(positionInitiale, skeleton.transform.position) < 0.1f) return 2;
+                    else foreach (ASkeletonDecisionScript skeleton in skeletonList) if(skeleton.isActiveAndEnabled) if (Vector3.Distance(positionInitiale, skeleton.transform.position) < 0.1f) return 2;
                     return 1;
                 }
             }
@@ -208,7 +208,7 @@ public class DungeonMasterScript : MonoBehaviour
         //Si on a une possibilite d'attaquer, il faut le faire
         if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 2) OrderPlayerAttack();
         //Sinon on peut lancer la suite de la boucle de gameplay
-        else CollectMoney();
+        else TuilesReset();
     }
 
     /// <summary>
@@ -216,6 +216,28 @@ public class DungeonMasterScript : MonoBehaviour
     /// </summary>
     public void PlayerHasAttacked()
     {
+        //On peut lancer la suite de la boucle de gameplay
+        TuilesReset();
+    }
+
+    /// <summary>
+    /// Permet de demander au maitre de jeu de faire une attaque a un endroit donne
+    /// </summary>
+    /// <param name="tuileCible">Quelle est la position qu'on vient d'essayer d'attaquer</param>
+    public void AttackTentative(Vector3 tuileCible)
+    {
+        if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f) playerGameObject.GetComponent<ADamageableScript>().GetDamaged();
+        else foreach (ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled)
+                    if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f) skeleton.gameObject.GetComponent<ADamageableScript>().GetDamaged();
+    }
+
+    /// <summary>
+    /// Remet "a 0" les tuiles de notre grille pour effacer notre UI
+    /// </summary>
+    private void TuilesReset()
+    {
+        for (int i = 0; i < levelWidth; i++) for (int j = 0; j < levelHeight; j++) if (solDonjon[i, j] != null) solDonjon[i, j].ResetColor();
+
         //On peut lancer la suite de la boucle de gameplay
         CollectMoney();
     }
@@ -230,17 +252,6 @@ public class DungeonMasterScript : MonoBehaviour
         {
             if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f) treasure.TreasureCollected();
         }
-        //On peut lancer la suite de la boucle de gameplay
-        TuilesReset();
-    }
-
-    /// <summary>
-    /// Remet "a 0" les tuiles de notre grille pour effacer notre UI
-    /// </summary>
-    private void TuilesReset()
-    {
-        for(int i = 0; i < levelWidth; i++) for(int j = 0; j < levelHeight; j++) if (solDonjon[i, j] != null) solDonjon[i, j].ResetColor();
-
         //On peut lancer la suite de la boucle de gameplay
         PlayerDistance();
     }

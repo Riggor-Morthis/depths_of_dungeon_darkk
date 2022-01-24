@@ -47,7 +47,7 @@ public class DungeonPlannerScript : MonoBehaviour
     private static void HolesGenerator()
     {
         //Le nombre de trous qu'on va placer dans notre niveau
-        budget = (int)(Random.Range(0.25f, 0.5f) * (levelHeight * levelWidth));
+        budget = (int)(Random.Range(0.2f, 0.4f) * (levelHeight * levelWidth));
         //Initialisation de variable
         holesPositions = new List<Vector2>();
 

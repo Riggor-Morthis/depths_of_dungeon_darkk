@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8379528403294085210}
   - component: {fileID: 5583213585866691480}
+  - component: {fileID: 1081642262233763006}
   m_Layer: 0
   m_Name: MeleeSkeleton
   m_TagString: Untagged
@@ -44,6 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e31fd43b5525774f9eeb1dd561d20d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1081642262233763006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379528403294085211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6a232102463574abbf200ddb8e4aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonePrefab: {fileID: 4716711720897600668, guid: 96e7a73d451b5cb49aed1c0c64ceb9f0, type: 3}
 --- !u!1001 &8379528402898122283
 PrefabInstance:
   m_ObjectHideFlags: 0

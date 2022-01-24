@@ -108,10 +108,11 @@ public class PlayerMovementScript : MonoBehaviour
             //Si on est presque a destination...
             if (Vector3.Distance(targetPosition, models.position) <= attackingSpeed * Time.deltaTime)
             {
-                //... on prend la bonne position et on passe a la seconde phase
+                //... on prend la bonne position et on demande a blesser ce qui se trouve sur une tuile donnee
                 models.position = targetPosition;
                 targetPosition = transform.position + new Vector3(0.5f, 0, 0.5f);
                 isForwarding = false;
+                dungeonMasterScript.AttackTentative(transform.position + currentMoveInput);
                 isReversing = true;
             }
             //Sinon on fait le mouvement d'attaque demande

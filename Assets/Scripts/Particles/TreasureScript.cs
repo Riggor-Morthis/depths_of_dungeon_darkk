@@ -11,7 +11,7 @@ public class TreasureScript : MonoBehaviour
 
     private void Awake()
     {
-        coinsInTreasure = Random.Range(3, 6);
+        coinsInTreasure = Random.Range(4, 10);
     }
 
     public void TreasureCollected()
