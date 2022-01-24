@@ -17,6 +17,8 @@ public class ParticleScript : MonoBehaviour
         moveZ = Random.Range(-1f, 1f);
         rotationY = Random.Range(-360f, 360f);
         model = transform.GetChild(0).gameObject;
+        //On fait deja un espacement avec l'entite histoire de
+        transform.position += new Vector3(moveX * 0.5f, 0, moveZ * 0.5f);
     }
 
     private void Update()

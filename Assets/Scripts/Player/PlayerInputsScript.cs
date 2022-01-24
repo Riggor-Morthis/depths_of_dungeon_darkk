@@ -6,14 +6,18 @@ public class PlayerInputsScript : MonoBehaviour
 {
     //Privates
     private DungeonMasterScript dungeonMasterScript;
-    private Vector2 startingMousePosition, endingMousePosition;
+    private Vector3 startingMousePosition, endingMousePosition;
     private float mouseAngle;
     private Vector3 moveInput = Vector3.forward;
-    private bool validMouseInput;
+    private bool validMouseInput = false;
+    private Camera mainCamera;
+    private Plane flatPlane = new Plane(Vector3.up, Vector3.zero);
+    private float currentFloat;
+    private Ray currentRay;
 
-    private void Awake()
+    private void Start()
     {
-        validMouseInput = false;
+        mainCamera = Camera.main;
     }
 
     private void Update()
@@ -21,14 +25,16 @@ public class PlayerInputsScript : MonoBehaviour
         //Recuperer l'endroit ou on appuie
         if (Input.GetMouseButtonDown(0))
         {
-            startingMousePosition = Input.mousePosition;
+            currentRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (flatPlane.Raycast(currentRay, out currentFloat)) startingMousePosition = currentRay.GetPoint(currentFloat);
             validMouseInput = true;
         }
 
         //Recuperer l'endroit ou on lache et en profiter pour calculer le vecteur demande
-        else if (Input.GetMouseButtonUp(0) && validMouseInput)
+        if (Input.GetMouseButtonUp(0) && validMouseInput)
         {
-            endingMousePosition = Input.mousePosition;
+            currentRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (flatPlane.Raycast(currentRay, out currentFloat)) endingMousePosition = currentRay.GetPoint(currentFloat);
             CalculateMouseVector();
         }
     }
@@ -38,15 +44,18 @@ public class PlayerInputsScript : MonoBehaviour
     /// </summary>
     private void CalculateMouseVector()
     {
-        //Commence par calculer l'angle du vecteur forme
-        mouseAngle = Vector2.SignedAngle(endingMousePosition - startingMousePosition, Vector2.up);
+        //Reset de variables
+        validMouseInput = false;
 
-        //On sert de l'angle pour deduire quel vecteur unitaire le joueur a forme
-        if (Mathf.Abs(mouseAngle) > 135) moveInput = -moveInput;
-        else if(Mathf.Abs(mouseAngle) >= 45)
+        //On fait l'angle entre notre vector d'input et le "haut" du plateau
+        mouseAngle = Vector3.SignedAngle(transform.forward, endingMousePosition - startingMousePosition,Vector3.up);
+        //On utilise l'angle pour determiner quel vecteur le joueur voulait faire
+        if (Mathf.Abs(mouseAngle) < 45) moveInput = transform.forward;
+        else if (Mathf.Abs(mouseAngle) > 135) moveInput = - transform.forward;
+        else
         {
-            if (mouseAngle >= 0) moveInput = new Vector3(moveInput.z, 0, -moveInput.x);
-            else moveInput = new Vector3(-moveInput.z, 0, moveInput.x);
+            if (mouseAngle > 0) moveInput = transform.right;
+            else moveInput = - transform.right;
         }
 
         //On communique l'input

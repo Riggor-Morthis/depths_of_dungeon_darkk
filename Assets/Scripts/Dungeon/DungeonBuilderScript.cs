@@ -6,11 +6,11 @@ public class DungeonBuilderScript : MonoBehaviour
 {
     //Prefabs
     [SerializeField]
-    private GameObject PlayerPrefab, MeleeSkeletonPrefab, RangedSkeletonPrefab, DungeonFloorPrefab, DungeonStairsPrefab, TreasurePrefab;
+    private GameObject playerPrefab, meleeSkeletonPrefab, rangedSkeletonPrefab, dungeonFloorPrefab, dungeonStairsPrefab, treasurePrefab;
     
     //Parent
     [SerializeField]
-    private GameObject CurrentFloor;
+    private GameObject currentFloor, currentPlayer, currentSkeletons, currentTreasures;
 
     //Privates
     private Vector2 currentVector2; //Stocke un vecteur temporaire
@@ -70,12 +70,12 @@ public class DungeonBuilderScript : MonoBehaviour
                 {
                     if (currentVector2 == stairsPosition)
                     {
-                        currentGameObject = GameObject.Instantiate(DungeonStairsPrefab, new Vector3(i, 0, j), Quaternion.identity, CurrentFloor.transform);
+                        currentGameObject = GameObject.Instantiate(dungeonStairsPrefab, new Vector3(i, 0, j), Quaternion.identity, currentFloor.transform);
                         currentGameObject.GetComponent<FloorScript>().Initialize((i + j) % 2, true);
                     }
                     else
                     {
-                        currentGameObject = GameObject.Instantiate(DungeonFloorPrefab, new Vector3(i, 0, j), Quaternion.identity, CurrentFloor.transform);
+                        currentGameObject = GameObject.Instantiate(dungeonFloorPrefab, new Vector3(i, 0, j), Quaternion.identity, currentFloor.transform);
                         currentGameObject.GetComponent<FloorScript>().Initialize((i + j) % 2, false);
                     }
 
@@ -86,7 +86,7 @@ public class DungeonBuilderScript : MonoBehaviour
         }
 
         //On place le joueur
-        currentGameObject = GameObject.Instantiate(PlayerPrefab, new Vector3(playerPosition.x, 0, playerPosition.y), Quaternion.identity, CurrentFloor.transform);
+        currentGameObject = GameObject.Instantiate(playerPrefab, new Vector3(playerPosition.x, 0, playerPosition.y), Quaternion.identity, currentPlayer.transform);
         dungeonMasterScript = GetComponent<DungeonMasterScript>();
         dungeonMasterScript.ReceivePlayer(currentGameObject);
     }
@@ -123,7 +123,7 @@ public class DungeonBuilderScript : MonoBehaviour
         skeletonList = new List<ASkeletonDecisionScript>();
         foreach (Vector2 enemy in enemyPositions)
         {
-            currentGameObject =  GameObject.Instantiate(MeleeSkeletonPrefab, new Vector3(enemy.x, 0, enemy.y), Quaternion.identity, CurrentFloor.transform);
+            currentGameObject =  GameObject.Instantiate(meleeSkeletonPrefab, new Vector3(enemy.x, 0, enemy.y), Quaternion.identity, currentSkeletons.transform);
             skeletonList.Add(currentGameObject.GetComponent<ASkeletonDecisionScript>());
         }
         dungeonMasterScript.ReceiveSkeletons(skeletonList);
@@ -137,7 +137,7 @@ public class DungeonBuilderScript : MonoBehaviour
         treasureList = new List<TreasureScript>();
         foreach (Vector2 treasure in treasuresPositions)
         {
-            currentGameObject = GameObject.Instantiate(TreasurePrefab, new Vector3(treasure.x, 0f, treasure.y), Quaternion.identity, CurrentFloor.transform);
+            currentGameObject = GameObject.Instantiate(treasurePrefab, new Vector3(treasure.x, 0f, treasure.y), Quaternion.identity, currentTreasures.transform);
             treasureList.Add(currentGameObject.GetComponent<TreasureScript>());
         }
         dungeonMasterScript.ReceiveTreasures(treasureList);

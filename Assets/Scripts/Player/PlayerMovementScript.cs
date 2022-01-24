@@ -7,8 +7,8 @@ public class PlayerMovementScript : MonoBehaviour
     //Privates
     private Transform pivotPoint, models; //L'endroit qu'on fait tourner pour gerer tout ce qui est modele et camera, et l'endroit qu'on utilise pour donner l'impression qu'on est un pion
     private DungeonMasterScript dungeonMasterScript; //Le maitre du donjon
-    private Vector3 lastMoveInput = Vector3.forward, currentMoveInput; //Le dernier input donne au joueur, et l'input qu'on traite actuellement
-    private bool isMoving = false, isRotating = false; //Est-ce qu'on est en train de faire un deplacement, est-ce qu'on est en train de tourner ?
+    private Vector3 lastMoveInput = Vector3.forward, currentMoveInput, currentAttackInput; //Le dernier input donne au joueur, et l'input qu'on traite actuellement
+    private bool isMoving = false, isRotating = false, isForwarding = false, isReversing = false; //Est-ce qu'on est en train de faire un deplacement, est-ce qu'on est en train de tourner ?
     private float movingSpeed = 2f, rotatingSpeed; //Les vitesses de mouvement et de rotation, respectivement
     private Vector3 targetPosition; //L'endroit ou on veut aller
 
@@ -43,13 +43,21 @@ public class PlayerMovementScript : MonoBehaviour
         }
     }
 
+    public void ReceiveAttackInstruction(Vector2 pai)
+    {
+        currentAttackInput = pai;
+        targetPosition = models.position + currentAttackInput * 0.5f;
+        isForwarding = true;
+    }
+
     private void Update()
     {
+        //GESTION MOUVEMENT//
         //Ici on tourne
         if (isRotating)
         {
             //Si on est presque a la fin...
-            if(Vector3.Angle(pivotPoint.forward, currentMoveInput) <= Mathf.Abs(rotatingSpeed * Time.deltaTime))
+            if (Vector3.Angle(pivotPoint.forward, currentMoveInput) <= Mathf.Abs(rotatingSpeed * Time.deltaTime))
             {
                 //... on prend la bonne position, et on engage la phase de deplacement
                 pivotPoint.Rotate(Vector3.up, Vector3.SignedAngle(pivotPoint.forward, currentMoveInput, Vector3.up));
@@ -77,6 +85,36 @@ public class PlayerMovementScript : MonoBehaviour
                 transform.position += currentMoveInput * movingSpeed * Time.deltaTime;
                 models.localPosition = Vector3.up * ElevationAccordingToDistance();
             }
+        }
+        //GESTION ATTAQUE//
+        //La partie avancer
+        else if (isForwarding)
+        {
+            //Si on est presque a destination...
+            if (Vector3.Distance(targetPosition, models.position) <= movingSpeed * Time.deltaTime)
+            {
+                //... on prend la bonne position et on passe a la seconde phase
+                models.position = targetPosition;
+                targetPosition = transform.position + new Vector3(0.5f, 0, 0.5f);
+                isForwarding = false;
+                isReversing = true;
+            }
+            //Sinon on fait le mouvement d'attaque demande
+            else models.position += currentAttackInput * Time.deltaTime;
+        }
+        //La partie reculer
+        else if (isReversing)
+        {
+            //Si on est presque a destination...
+            if (Vector3.Distance(targetPosition, models.position) <= movingSpeed * Time.deltaTime)
+            {
+                //... on prend la bonne position et on passe a la seconde phase
+                models.position = targetPosition;
+                dungeonMasterScript.PlayerHasAttacked();
+                isReversing = false;
+            }
+            //Sinon on fait l'inverse du mouvement d'attaque demande pour inverser ses effets
+            else models.position -= currentAttackInput * Time.deltaTime;
         }
     }
 

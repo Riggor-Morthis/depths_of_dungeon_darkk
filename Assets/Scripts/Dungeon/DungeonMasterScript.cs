@@ -151,6 +151,7 @@ public class DungeonMasterScript : MonoBehaviour
         //On desactive les inputs (conflit) puis on verifie que le deplacement est legal
         AllowPlayerMovement(false);
         if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 1) OrderPlayerMovement();
+        else if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 2) OrderPlayerAttack();
         else AllowPlayerMovement(true);
     }
 
@@ -192,9 +193,28 @@ public class DungeonMasterScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Le joueur a fini son mouvement et on peut donc passer a la suite
+    /// On ordonne au script de mouvement de gerer l'attaque du joueur vers un squelette
+    /// </summary>
+    private void OrderPlayerAttack()
+    {
+        playerMovementScript.ReceiveAttackInstruction(playerMoveInput);
+    }
+
+    /// <summary>
+    /// Le joueur a fini son mouvement et on peut donc passer a la suite, que ce soit une attaque ou pas
     /// </summary>
     public void PlayerHasMoved()
+    {
+        //Si on a une possibilite d'attaquer, il faut le faire
+        if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 2) OrderPlayerAttack();
+        //Sinon on peut lancer la suite de la boucle de gameplay
+        else CollectMoney();
+    }
+
+    /// <summary>
+    /// Le joueur a fini son attaque et on peut donc passer a la suite
+    /// </summary>
+    public void PlayerHasAttacked()
     {
         //On peut lancer la suite de la boucle de gameplay
         CollectMoney();
