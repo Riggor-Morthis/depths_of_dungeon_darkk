@@ -56,13 +56,16 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\UI\CelebrationScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Player\PlayerInputsScript.cs" />
     <Compile Include="Assets\Scripts\Particles\TreasureScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\FloorScript.cs" />
+    <Compile Include="Assets\Scripts\Audio\AudioManagerScript.cs" />
     <Compile Include="Assets\Scripts\UI\ScoreModifierScript.cs" />
     <Compile Include="Assets\Scripts\Entities\ADamageableScript.cs" />
     <Compile Include="Assets\Scripts\Particles\ParticleScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonBuilderScript.cs" />
+    <Compile Include="Assets\Scripts\Audio\Sound.cs" />
     <Compile Include="Assets\Scripts\Entities\Skeletons\MeleeMovementScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonMasterScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Skeletons\MeleeDecisionScript.cs" />
@@ -72,7 +75,6 @@
     <Compile Include="Assets\Scripts\Entities\PlayerDamageScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Skeletons\ASkeletonMovementScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Skeletons\ASkeletonDecisionScript.cs" />
-    <Compile Include="Assets\Scripts\UI\CelebrationScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\ScriptsAssembly.asmdef" />
@@ -659,9 +661,6 @@
     </Reference>
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.20f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>

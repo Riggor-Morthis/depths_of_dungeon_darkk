@@ -27,6 +27,15 @@ public class ScoreModifierScript : MonoBehaviour
         scoreSpeed = (targetScore - currentScore)*4;
     }
 
+    /// <summary>
+    /// Revois le score a zero
+    /// </summary>
+    public void Reset()
+    {
+        targetScore = 0;
+        scoreSpeed = -currentScore * 0.5f;
+    }
+
     private void Update()
     {
         //Pas besoin de faire d'update si on a deja le bon score

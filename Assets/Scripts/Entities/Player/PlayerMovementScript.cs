@@ -112,7 +112,7 @@ public class PlayerMovementScript : MonoBehaviour
                 models.position = targetPosition;
                 targetPosition = transform.position + new Vector3(0.5f, 0, 0.5f);
                 isForwarding = false;
-                dungeonMasterScript.AttackTentative(transform.position + currentMoveInput);
+                dungeonMasterScript.AttackTentative(transform.position + currentMoveInput, true);
                 isReversing = true;
             }
             //Sinon on fait le mouvement d'attaque demande

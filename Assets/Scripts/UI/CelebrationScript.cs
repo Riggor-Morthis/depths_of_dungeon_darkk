@@ -5,17 +5,24 @@ using UnityEngine;
 public class CelebrationScript : MonoBehaviour
 {
     [SerializeField]
-    private GameObject coinPrefab;
-    private DungeonMasterScript dungeonMasterSript;
-    private GameObject playerGameObject;
+    private GameObject coinPrefab; //Qu'est-ce qu'une piece
+    private DungeonMasterScript dungeonMasterSript; //Le script pour le maitre du donjon
+    private GameObject playerGameObject; //Le joueur
+    private AudioManagerScript audioManager; //Pour jouer des sons
     private int currentCoins, totalCoins; //Combien de pieces on veut faire apparaitre, combien de pieces sont apparus
     private float realCoins, coinSpeed; //Combien de pieces sont reellements apparues, et a quelle vitesse on doit les faire apparaitre
     private bool isCelebrating = false; //Est-ce qu'on est en train de celebrer la fin d'un niveau
 
-    public void ReceiveDungeonMaster(DungeonMasterScript dms, GameObject pgo)
+    /// <summary>
+    /// Pour initialiser nos variables
+    /// </summary>
+    /// <param name="dms">Le maitre du donjon</param>
+    /// <param name="pgo">Le joueur</param>
+    public void ReceiveDungeonMaster(DungeonMasterScript dms, GameObject pgo, AudioManagerScript ams)
     {
         dungeonMasterSript = dms;
         playerGameObject = pgo;
+        audioManager = ams;
     }
 
     /// <summary>
@@ -24,7 +31,7 @@ public class CelebrationScript : MonoBehaviour
     public void Celebration()
     {
         totalCoins = dungeonMasterSript.GetScore() / 1000;
-        coinSpeed = totalCoins * 2;
+        coinSpeed = totalCoins * 0.5f;
         currentCoins = 0;
         realCoins = 0;
         isCelebrating = true;
@@ -46,6 +53,7 @@ public class CelebrationScript : MonoBehaviour
                 //Le vrai nombre de pieces est au dessus du faux nombre de pieces, on en lance une nouvelle
                 if(realCoins > currentCoins)
                 {
+                    audioManager.Play("Coins");
                     GameObject.Instantiate(coinPrefab, playerGameObject.transform.position, Quaternion.identity, transform);
                     currentCoins++;
                 }

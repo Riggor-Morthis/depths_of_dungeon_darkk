@@ -6,6 +6,7 @@ using UnityEngine;
 public class DungeonMasterScript : MonoBehaviour
 {
     //Privates
+    private AudioManagerScript audioManager; //Pour les sons
     private ScoreModifierScript scoreScript; //Le script pour changer le score actuel
     private GameObject playerGameObject; //Pour stocker le joueur
     private Vector3 stairsPosition; //Pour savoir ou on finit le niveau
@@ -23,9 +24,12 @@ public class DungeonMasterScript : MonoBehaviour
     private List<ASkeletonDecisionScript> skeletonList; //Tous les squelettes presents dans notre niveau
     private List<TreasureScript> treasureList; //Tous les tresors presents dans notre niveau
     private int skeletonActions; //Pour stocker le nombre de squelettes qui ont fini de bouger
+    private bool stepSound; //Pour ne joueur qu'un seul bruit de pas pour tous les squelettes
+    private bool tooManySkeleton;
 
     private void Start()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManagerScript>();
         scoreScript = GetComponent<ScoreModifierScript>();
         //Pour commencer, on genere un donjon
         GetComponent<DungeonBuilderScript>().DungeonBuilder();
@@ -51,10 +55,10 @@ public class DungeonMasterScript : MonoBehaviour
         playerMovementScript.ReceiveDungeonMaster(this);
         //Le script joueur pour savoir si il a pris des degats
         playerDamageScript = playerGameObject.GetComponent<PlayerDamageScript>();
-        playerDamageScript.ReceiveDungeonMaster(this);
+        playerDamageScript.ReceiveDungeonMaster(this, audioManager);
         //Le script qu'on utilise a la toute fin pour celebrer une victoire
         celebrationScript = GetComponent<CelebrationScript>();
-        celebrationScript.ReceiveDungeonMaster(this, playerGameObject);
+        celebrationScript.ReceiveDungeonMaster(this, playerGameObject, audioManager);
     }
 
     /// <summary>
@@ -167,7 +171,11 @@ public class DungeonMasterScript : MonoBehaviour
         AllowPlayerMovement(false);
         if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 1) OrderPlayerMovement();
         else if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 2) OrderPlayerAttack();
-        else AllowPlayerMovement(true);
+        else
+        {
+            audioManager.Play("Error");
+            AllowPlayerMovement(true);
+        }
     }
 
     /// <summary>
@@ -204,6 +212,7 @@ public class DungeonMasterScript : MonoBehaviour
     /// </summary>
     private void OrderPlayerMovement()
     {
+        audioManager.Play("Step");
         playerMovementScript.ReceiveMoveInstruction(playerMoveInput);
     }
 
@@ -235,9 +244,11 @@ public class DungeonMasterScript : MonoBehaviour
     {
         if (Vector3.Distance(playerGameObject.transform.position, stairsPosition) < 0.1f)
         {
+            audioManager.Play("Triumph");
             DungeonPlannerScript.LevelComplete();
             playerDamageScript.Celebration();
             celebrationScript.Celebration();
+            scoreScript.Reset();
         }
     }
 
@@ -254,8 +265,11 @@ public class DungeonMasterScript : MonoBehaviour
     /// Permet de demander au maitre de jeu de faire une attaque a un endroit donne
     /// </summary>
     /// <param name="tuileCible">Quelle est la position qu'on vient d'essayer d'attaquer</param>
-    public void AttackTentative(Vector3 tuileCible)
+    public void AttackTentative(Vector3 tuileCible, bool melee)
     {
+        if (melee) audioManager.Play("Melee");
+        else audioManager.Play("Ranged");
+
         if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f)
         {
             //On endommage le joueur, il faut donc le signaler a son script et ajuster le score en consequence
@@ -266,6 +280,7 @@ public class DungeonMasterScript : MonoBehaviour
                     if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f)
                     {
                         //On a endommage un squelette, il faut donc le signaler a son script et changer notre score
+                        audioManager.Play("EnemyDeath");
                         skeleton.gameObject.GetComponent<ADamageableScript>().GetDamaged();
                         if (skeleton.GetComponent<MeleeDecisionScript>() != null) scoreScript.ChangeScore(Random.Range(1000, 2000));
                         else scoreScript.ChangeScore(Random.Range(3000, 4000));
@@ -294,6 +309,7 @@ public class DungeonMasterScript : MonoBehaviour
             if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f)
                     if (treasure.isActiveAndEnabled)
                     {
+                        audioManager.Play("Coins");
                         treasure.TreasureCollected();
                         //On oublie pas de rendre son casque au joueur, et d'ajuster le score en consequence
                         if (playerDamageScript.HelmetChange(true)) scoreScript.ChangeScore(Random.Range(2000, 3000));
@@ -334,7 +350,17 @@ public class DungeonMasterScript : MonoBehaviour
             }
 
         //Maintenant que tous le monde sait ce qu'il peut faire, ils vont tous agir en consequence
-        foreach (ASkeletonDecisionScript skeleton in skeletonList) skeleton.LaunchAnimation();
+        stepSound = true;
+        tooManySkeleton = true;
+        foreach (ASkeletonDecisionScript skeleton in skeletonList)
+        {
+            if (!skeleton.GetIntentionAttaque() && !skeleton.GetDeathAnimation() && stepSound)
+            {
+                stepSound = false;
+                audioManager.Play("Step");
+            }
+            skeleton.LaunchAnimation();
+        }
     }
 
     /// <summary>
@@ -402,13 +428,17 @@ public class DungeonMasterScript : MonoBehaviour
                 GameObject.Destroy(currentGameObject);
             }
         //Si tous les squelettes ont agis, on engage la suite de la boucle de gameplay
-        if (skeletonActions == skeletonList.Count) StartCoroutine(Pause());
+        if (skeletonActions >= skeletonList.Count && tooManySkeleton)
+        {
+            tooManySkeleton = false;
+            StartCoroutine(Pause());
+        }
     }
 
     /// <summary>
-    /// Pour faire courte pause pour s'assurer que tous les squelettes ont fini
+    /// Pour attendre que tous les squelettes aient finis
     /// </summary>
-    /// <returns>Une pause</returns>
+    /// <returns>Une courte pause</returns>
     IEnumerator Pause()
     {
         yield return new WaitForSeconds(0.1f);

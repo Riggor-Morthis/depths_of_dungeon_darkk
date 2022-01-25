@@ -6,6 +6,7 @@ public class PlayerDamageScript : ADamageableScript
 {
     [SerializeField]
     private GameObject helmetPrefab; //Qu'est-ce qu'un casque
+    private AudioManagerScript audioManager; //Pour jouer les sons
     private bool helmeted = true; //Est-ce qu'on a un casque actuellement ?
     private DungeonMasterScript dungeonMasterScript; //Le maitre du donjon
     private GameObject helmetedModel, nakedModel; //Les 2 modeles joueur selon si on a un casque ou pas
@@ -15,9 +16,11 @@ public class PlayerDamageScript : ADamageableScript
     /// Permet de recevoir le maitre du donjon et aussi d'initialiser nos variables
     /// </summary>
     /// <param name="dms">Le script maitre du donjon</param>
-    public void ReceiveDungeonMaster(DungeonMasterScript dms)
+    public void ReceiveDungeonMaster(DungeonMasterScript dms, AudioManagerScript ams)
     {
         dungeonMasterScript = dms;
+        audioManager = ams;
+
         helmetedModel = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         nakedModel = transform.GetChild(0).GetChild(0).GetChild(1).gameObject;
         nakedModel.SetActive(false);
@@ -45,7 +48,11 @@ public class PlayerDamageScript : ADamageableScript
     ///          false sinon</returns>
     public bool HelmetChange(bool h)
     {
-        if (helmeted == h) return false;
+        if (helmeted == h)
+        {
+            if (!helmeted) audioManager.Play("PlayerHurt");
+            return false;
+        }
         else
         {
             if (!helmeted)
@@ -56,6 +63,7 @@ public class PlayerDamageScript : ADamageableScript
             }
             else
             {
+                audioManager.Play("Helmet");
                 helmeted = false;
                 helmetedModel.SetActive(false);
                 nakedModel.SetActive(true);
