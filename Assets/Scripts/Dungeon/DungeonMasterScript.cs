@@ -1,4 +1,4 @@
-using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ public class DungeonMasterScript : MonoBehaviour
     private GameObject playerGameObject; //Pour stocker le joueur
     private PlayerInputsScript playerInputScript; //Script d'inputs joueur
     private PlayerMovementScript playerMovementScript; //Script de mouvement joueur
+    private PlayerDamageScript playerDamageScript; //Script des points de vie du joueur
     private Vector3 playerMoveInput; //La direction que le joueur veut prendre
     private FloorScript[,] solDonjon; //Les tuiles de notre donjon pour verifier les deplacements
     private int levelWidth, levelHeight; //Les dimensions du donjon
@@ -42,6 +43,9 @@ public class DungeonMasterScript : MonoBehaviour
         //Le script de mouvement joueur
         playerMovementScript = playerGameObject.GetComponent<PlayerMovementScript>();
         playerMovementScript.ReceiveDungeonMaster(this);
+        //Le script joueur pour savoir si il a pris des degats
+        playerDamageScript = playerGameObject.GetComponent<PlayerDamageScript>();
+        playerDamageScript.ReceiveDungeonMaster(this);
     }
 
     /// <summary>
@@ -253,7 +257,12 @@ public class DungeonMasterScript : MonoBehaviour
         foreach (TreasureScript treasure in treasureList)
         {
             if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f)
-                    if (treasure.isActiveAndEnabled) treasure.TreasureCollected();
+                    if (treasure.isActiveAndEnabled)
+                    {
+                        treasure.TreasureCollected();
+                        //On oublie pas de rendre son casque au joueur
+                        playerDamageScript.HelmetChange(true);
+                    }
         }
 
         //On peut lancer la suite de la boucle de gameplay
@@ -326,10 +335,19 @@ public class DungeonMasterScript : MonoBehaviour
     {
         if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f) return false;
         //On cherche les squelettes active qui veulent a la fois se deplacer et qui ne vont pas mourir
-        else foreach (ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled) if (!skeleton.GetDeathAnimation() && !skeleton.GetIntentionAttaque())
-                        //On oublie pas de s'assurer qu'on s'inspecte pas nous meme
-                        if (Vector3.Distance(tuileCible, skeleton.GetTarget()) < 0.1f && skeleton != ourself) return false;
-
+        else foreach (ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled) if (!skeleton.GetDeathAnimation())
+                        //Si le squelette compte se deplacer, on check la position qu'il VA occuper
+                        if (!skeleton.GetIntentionAttaque())
+                        {
+                            //On oublie pas de s'assurer qu'on s'inspecte pas nous meme
+                            if (Vector3.Distance(tuileCible, skeleton.GetTarget()) < 0.1f && skeleton != ourself) return false;
+                        }
+                        //Sinon, on check la position qu'il occupe ACTUELLEMENT
+                        else
+                        {
+                            //On oublie pas de s'assurer qu'on s'inspecte pas nous meme
+                            if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f && skeleton != ourself) return false;
+                        }
         return true;
     }
 
@@ -342,5 +360,13 @@ public class DungeonMasterScript : MonoBehaviour
         skeletonActions++;
         //Si tous les squelettes ont agis, on engage la suite de la boucle de gameplay
         if(skeletonActions == skeletonList.Count) PlayerDistance();
+    }
+
+    /// <summary>
+    /// Permet de recharger le niveau actuel lorsque le joueur meurt
+    /// </summary>
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

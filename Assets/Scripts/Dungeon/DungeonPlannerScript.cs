@@ -35,6 +35,13 @@ public class DungeonPlannerScript : MonoBehaviour
         //On commence par determiner les dimensions du niveau
         levelHeight = 9 + (Random.Range(0, 5) * 2);
         levelWidth = 22 - levelHeight;
+        //On joue en 9:16
+        if(levelWidth > levelHeight)
+        {
+            currentFloat = levelHeight;
+            levelHeight = levelWidth;
+            levelWidth = (int)currentFloat;
+        }
 
         //Ensuite on place le joueur et la sortie en oppose
         playerPosition = new Vector2(Random.Range(0, levelWidth), 0);
@@ -86,7 +93,7 @@ public class DungeonPlannerScript : MonoBehaviour
     private static void ProblemSolver()
     {
         //On commence par nettoyer les chemins horizontaux
-        for(int i = Mathf.Min((int)playerPosition.x, (int)stairsPosition.x); i < Mathf.Max((int)playerPosition.x, (int)playerPosition.y); i++)
+        for(int i = Mathf.Min((int)playerPosition.x, (int)stairsPosition.x); i <= Mathf.Max((int)playerPosition.x, (int)stairsPosition.x); i++)
         {
             currentVector = new Vector2(i, 0);
             if (holesPositions.Contains(currentVector)) holesPositions.Remove(currentVector);
