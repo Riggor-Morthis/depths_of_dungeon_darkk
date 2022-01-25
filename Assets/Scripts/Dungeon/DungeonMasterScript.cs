@@ -5,6 +5,7 @@ using UnityEngine;
 public class DungeonMasterScript : MonoBehaviour
 {
     //Privates
+    private ScoreModifierScript scoreScript;
     private GameObject playerGameObject; //Pour stocker le joueur
     private PlayerInputsScript playerInputScript; //Script d'inputs joueur
     private PlayerMovementScript playerMovementScript; //Script de mouvement joueur
@@ -22,6 +23,7 @@ public class DungeonMasterScript : MonoBehaviour
 
     private void Start()
     {
+        scoreScript = GetComponent<ScoreModifierScript>();
         //Pour commencer, on genere un donjon
         GetComponent<DungeonBuilderScript>().DungeonBuilder();
         //On demande ensuite a la grille de gerer la distance au joueur
@@ -232,9 +234,20 @@ public class DungeonMasterScript : MonoBehaviour
     /// <param name="tuileCible">Quelle est la position qu'on vient d'essayer d'attaquer</param>
     public void AttackTentative(Vector3 tuileCible)
     {
-        if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f) playerGameObject.GetComponent<ADamageableScript>().GetDamaged();
+        if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f)
+        {
+            //On endommage le joueur, il faut donc le signaler a son script et ajuster le score en consequence
+            playerGameObject.GetComponent<ADamageableScript>().GetDamaged();
+            scoreScript.ChangeScore(Random.Range(-500, 0));
+        }
         else foreach (ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled)
-                    if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f) skeleton.gameObject.GetComponent<ADamageableScript>().GetDamaged();
+                    if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f)
+                    {
+                        //On a endommage un squelette, il faut donc le signaler a son script et changer notre score
+                        skeleton.gameObject.GetComponent<ADamageableScript>().GetDamaged();
+                        if (skeleton.GetComponent<MeleeDecisionScript>() != null) scoreScript.ChangeScore(Random.Range(1000, 2000));
+                        else scoreScript.ChangeScore(Random.Range(3000, 4000));
+                    }
     }
 
     /// <summary>
@@ -260,8 +273,9 @@ public class DungeonMasterScript : MonoBehaviour
                     if (treasure.isActiveAndEnabled)
                     {
                         treasure.TreasureCollected();
-                        //On oublie pas de rendre son casque au joueur
-                        playerDamageScript.HelmetChange(true);
+                        //On oublie pas de rendre son casque au joueur, et d'ajuster le score en consequence
+                        if (playerDamageScript.HelmetChange(true)) scoreScript.ChangeScore(Random.Range(2000, 3000));
+                        else scoreScript.ChangeScore(Random.Range(4000, 5000));
                     }
         }
 
