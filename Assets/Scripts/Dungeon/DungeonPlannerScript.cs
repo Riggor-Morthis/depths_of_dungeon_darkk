@@ -33,8 +33,8 @@ public class DungeonPlannerScript : MonoBehaviour
     private static void BasicGenerator()
     {
         //On commence par determiner les dimensions du niveau
-        levelWidth = 15 + (Random.Range(0, 10) * 2);
-        levelHeight = 48 - levelWidth;
+        levelHeight = 9 + (Random.Range(0, 4) * 2);
+        levelWidth = 20 - levelHeight;
 
         //Ensuite on place le joueur et la sortie en oppose
         playerPosition = new Vector2(Random.Range(0, levelWidth), 0);
@@ -110,7 +110,7 @@ public class DungeonPlannerScript : MonoBehaviour
     private static void EnemiesGenerator()
     {
         //Combien d'ennemis on va avoir dans notre niveau
-        budget = (int)(Random.Range(0.01f, 0.03f) * (levelHeight * levelWidth)) + 1;
+        budget = (int)(Random.Range(0.02f, 0.05f) * (levelHeight * levelWidth)) + 1;
         //Initialisation de variables
         enemyPositions = new List<Vector2>();
 
@@ -147,7 +147,7 @@ public class DungeonPlannerScript : MonoBehaviour
     private static void TreasuresGenerator()
     {
         //Combien de tresors on veut dans notre donjon
-        budget = (int)(0.02f * (levelHeight * levelWidth));
+        budget = (int)(Random.Range(0.02f, 0.05f) * (levelHeight * levelWidth));
         //Initialisation de variables
         treasuresPositions = new List<Vector2>();
 

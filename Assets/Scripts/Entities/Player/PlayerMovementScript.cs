@@ -9,7 +9,7 @@ public class PlayerMovementScript : MonoBehaviour
     private DungeonMasterScript dungeonMasterScript; //Le maitre du donjon
     private Vector3 lastMoveInput = Vector3.forward, currentMoveInput; //Le dernier input donne au joueur, et l'input qu'on traite actuellement
     private bool isMoving = false, isRotating = false, isForwarding = false, isReversing = false; //Est-ce qu'on est en train de faire un deplacement, est-ce qu'on est en train de tourner ?
-    private float movingSpeed = 2.5f, attackingSpeed = 4.5f, rotatingSpeed; //Les vitesses de mouvement et de rotation, respectivement
+    private float movingSpeed = 2.5f, attackingSpeed = 5f, rotatingSpeed; //Les vitesses de mouvement et de rotation, respectivement
     private Vector3 targetPosition; //L'endroit ou on veut aller
 
     /// <summary>

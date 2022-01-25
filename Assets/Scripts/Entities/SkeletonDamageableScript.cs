@@ -14,9 +14,12 @@ public class SkeletonDamageableScript : ADamageableScript
         howManyBones = Random.Range(4, 10);
     }
 
+    /// <summary>
+    /// Lorsqu'on est frappe, on disparait dans une fontaine d'ossements et on arrete d'agir
+    /// </summary>
     public override void GetDamaged()
     {
-        for (int i = 0; i < howManyBones; i++) GameObject.Instantiate(bonePrefab, transform.position, Quaternion.identity, transform.parent);
+        for (int i = 0; i < howManyBones; i++) GameObject.Instantiate(bonePrefab, transform.GetChild(0).position, Quaternion.identity, transform.parent);
         gameObject.SetActive(false);
     }
 }

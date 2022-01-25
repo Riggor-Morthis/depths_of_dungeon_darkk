@@ -14,8 +14,10 @@ public class DungeonMasterScript : MonoBehaviour
     private List<Vector2> currentTuiles, prevTuiles, nextTuiles, neighboringTuiles; //Utilisees par l'algo de distance au joueur, respectivement :
                                                                                     //les tuiles en cours de traitement, celles deja traitees, celles traitees a la prochaine iteration, celles renvoyees par la tuile en cours
     private int currentInt; //Pour stocker un entier temporaire
+    private GameObject currentGameObject; //Pour stocker un gameobject
     private List<ASkeletonDecisionScript> skeletonList; //Tous les squelettes presents dans notre niveau
     private List<TreasureScript> treasureList; //Tous les tresors presents dans notre niveau
+    private int skeletonActions; //Pour stocker le nombre de squelettes qui ont fini de bouger
 
     private void Start()
     {
@@ -242,6 +244,82 @@ public class DungeonMasterScript : MonoBehaviour
         CollectMoney();
     }
 
+    private void SkeletonsActions()
+    {
+        //On commence par nettoyer notre liste de squelettes
+        skeletonActions = 0;
+        for(int i = skeletonList.Count -1; i >= 0; i--) if (!skeletonList[i].isActiveAndEnabled)
+            {
+                currentGameObject = skeletonList[i].gameObject;
+                skeletonList.RemoveAt(i);
+                GameObject.Destroy(currentGameObject);
+            }
+
+        //On va interroger en priorite les squelettes qui veulent attaquer
+        foreach(ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.GetIntentionAttaque())
+            {
+                skeleton.AttackProjection();
+            }
+        //On peut ensuite interroger le reste des squelettes pour savoir ce qu'ils vont faire
+        foreach(ASkeletonDecisionScript skeleton in skeletonList) if (!skeleton.GetIntentionAttaque())
+            {
+                skeleton.MovementProjection();
+            }
+
+        //Maintenant que tous le monde sait ce qu'il peut faire, ils vont tous agir en consequence
+        foreach (ASkeletonDecisionScript skeleton in skeletonList) skeleton.LaunchAnimation();
+    }
+
+    /// <summary>
+    /// Lorsque les squelettes projettent leur attaque, cette fonction permet de verifier s'ils touchent un autre squelette, et de prevenir ce dernier le cas echeant
+    /// </summary>
+    /// <param name="tuileCible">L'endroit ou on veut taper</param>
+    /// <returns>true si on a un squelette sous la tuile ciblee ou si on en dehors de la grille
+    ///          false sinon</returns>
+    public bool CheckSkeletonTarget(Vector3 tuileCible)
+    {
+        //On verifie que la tuile est dans la grille
+        if (tuileCible.x < 0 || tuileCible.x >= levelWidth) return true;
+        else if (tuileCible.z < 0 || tuileCible.z >= levelHeight) return true;
+
+        //Sinon, si on touche bien un squelette on va lui signaler
+        foreach (ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled) if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f)
+                {
+                    skeleton.YouWillDie();
+                    return true;
+                }
+        return false;
+    }
+
+    /// <summary>
+    /// Fonctionne similairement a la legalite des mouvements, sauf que :
+    /// on sait deja que le mouvement est legal, donc on check pas la grille
+    /// on ne veut pas rentrer dans le joueur, donc on check sa position actuelle
+    /// on ne veut pas rentrer dans un autre squelette lors de notre mouvement, donc on compare notre position cible avec des autres squelettes qui vont bouger, plutot qu'avec leurs positions actuelles
+    /// </summary>
+    /// <param name="tuile">L'endroit ou on veut aller</param>
+    /// <returns>true si le mouvement va etre possible
+    ///          false sinon</returns>
+    public bool CheckSkeletonMovement(Vector3 tuileCible)
+    {
+        if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f) return false;
+        //On cherche les squelettes active qui veulent a la fois se deplacer et qui ne vont pas mourir
+        else foreach(ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled) if (!skeleton.GetDeathAnimation() && !skeleton.GetIntentionAttaque())
+                        if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f) return false;
+        return true;
+    }
+
+    /// <summary>
+    /// Utilise pour tenir compte du nombre de squelettes qui ont agis, et le nombre de squelettes qui doivent encore agir
+    /// </summary>
+    public void SkeletonHasActed()
+    {
+        //On compte le nombre de squelettes qui ont agis
+        skeletonActions++;
+        //Si tous les squelettes ont agis, on engage la suite de la boucle de gameplay
+        if(skeletonActions == skeletonList.Count) PlayerDistance();
+    }
+
     /// <summary>
     /// Demande a chacun des tresors dans la scene de savoir si le joueur l'a ramasse ou non
     /// </summary>
@@ -250,9 +328,11 @@ public class DungeonMasterScript : MonoBehaviour
         //On inspecte chaque tresor
         foreach(TreasureScript treasure in treasureList)
         {
-            if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f) treasure.TreasureCollected();
+            if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f)
+                    if(treasure.isActiveAndEnabled) treasure.TreasureCollected();
         }
+
         //On peut lancer la suite de la boucle de gameplay
-        PlayerDistance();
+        SkeletonsActions();
     }
 }

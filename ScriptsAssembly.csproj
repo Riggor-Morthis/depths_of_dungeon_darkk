@@ -59,15 +59,17 @@
     <Compile Include="Assets\Scripts\Entities\Player\PlayerInputsScript.cs" />
     <Compile Include="Assets\Scripts\Particles\TreasureScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\FloorScript.cs" />
+    <Compile Include="Assets\Scripts\Entities\ADamageableScript.cs" />
     <Compile Include="Assets\Scripts\Particles\ParticleScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonBuilderScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonMasterScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Skeletons\MeleeDecisionScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon\DungeonPlannerScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Player\PlayerMovementScript.cs" />
-    <Compile Include="Assets\Scripts\Entities\Skeletons\ASkeletonDecisionScript.cs" />
-    <Compile Include="Assets\Scripts\Entities\ADamageableScript.cs" />
     <Compile Include="Assets\Scripts\Entities\SkeletonDamageableScript.cs" />
+    <Compile Include="Assets\Scripts\Entities\Skeletons\ASkeletonDecisionScript.cs" />
+    <Compile Include="Assets\Scripts\Entities\Skeletons\ASkeletonMovementScript.cs" />
+    <Compile Include="Assets\Scripts\Entities\Skeletons\MeleeMovementScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\ScriptsAssembly.asmdef" />
