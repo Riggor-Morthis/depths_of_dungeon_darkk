@@ -48,4 +48,6 @@ public class ScoreModifierScript : MonoBehaviour
     private void UpdateUI(){
         scoreNumber.text = ((int)currentScore).ToString();
     }
+
+    public int GetScore() => targetScore;
 }

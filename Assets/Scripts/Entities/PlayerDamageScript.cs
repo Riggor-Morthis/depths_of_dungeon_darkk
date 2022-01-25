@@ -9,6 +9,7 @@ public class PlayerDamageScript : ADamageableScript
     private bool helmeted = true; //Est-ce qu'on a un casque actuellement ?
     private DungeonMasterScript dungeonMasterScript; //Le maitre du donjon
     private GameObject helmetedModel, nakedModel; //Les 2 modeles joueur selon si on a un casque ou pas
+    private GameObject helmetedCelebration, nakedCelebration; //Comme c'est deja ici qu'on gere les modeles, c'est ici qu'on va activer les modeles de celebration
 
     /// <summary>
     /// Permet de recevoir le maitre du donjon et aussi d'initialiser nos variables
@@ -20,6 +21,10 @@ public class PlayerDamageScript : ADamageableScript
         helmetedModel = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         nakedModel = transform.GetChild(0).GetChild(0).GetChild(1).gameObject;
         nakedModel.SetActive(false);
+        helmetedCelebration = transform.GetChild(0).GetChild(0).GetChild(2).gameObject;
+        helmetedCelebration.SetActive(false);
+        nakedCelebration = transform.GetChild(0).GetChild(0).GetChild(3).gameObject;
+        nakedCelebration.SetActive(false);
     }
 
     /// <summary>
@@ -56,6 +61,23 @@ public class PlayerDamageScript : ADamageableScript
                 nakedModel.SetActive(true);
             }
             return true;
+        }
+    }
+
+    /// <summary>
+    /// Permet de changer les modeles pour charger ceux de celebration
+    /// </summary>
+    public void Celebration()
+    {
+        if (helmeted)
+        {
+            helmetedModel.SetActive(false);
+            helmetedCelebration.SetActive(true);
+        }
+        else
+        {
+            nakedModel.SetActive(false);
+            nakedCelebration.SetActive(true);
         }
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Entities\PlayerDamageScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Skeletons\ASkeletonMovementScript.cs" />
     <Compile Include="Assets\Scripts\Entities\Skeletons\ASkeletonDecisionScript.cs" />
+    <Compile Include="Assets\Scripts\UI\CelebrationScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\ScriptsAssembly.asmdef" />

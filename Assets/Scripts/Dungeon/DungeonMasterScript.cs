@@ -1,15 +1,18 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class DungeonMasterScript : MonoBehaviour
 {
     //Privates
-    private ScoreModifierScript scoreScript;
+    private ScoreModifierScript scoreScript; //Le script pour changer le score actuel
     private GameObject playerGameObject; //Pour stocker le joueur
+    private Vector3 stairsPosition; //Pour savoir ou on finit le niveau
     private PlayerInputsScript playerInputScript; //Script d'inputs joueur
     private PlayerMovementScript playerMovementScript; //Script de mouvement joueur
     private PlayerDamageScript playerDamageScript; //Script des points de vie du joueur
+    private CelebrationScript celebrationScript; //Le script qu'on utilise a la fin pour celebrer le niveau
     private Vector3 playerMoveInput; //La direction que le joueur veut prendre
     private FloorScript[,] solDonjon; //Les tuiles de notre donjon pour verifier les deplacements
     private int levelWidth, levelHeight; //Les dimensions du donjon
@@ -34,10 +37,11 @@ public class DungeonMasterScript : MonoBehaviour
     /// Permet de recevoir le gameobject joueur lorsqu'il est cree + initialise nos references aux scripts joueur
     /// </summary>
     /// <param name="p">Le gameobject du joueur</param>
-    public void ReceivePlayer(GameObject p)
+    public void ReceivePlayer(GameObject p, Vector3 sp)
     {
         //On commence par le gameobject
         playerGameObject = p;
+        stairsPosition = sp;
         //Ensuite le player inputscript, qu'on initialise avant de le desactiver (conflits d'inputs)
         playerInputScript = playerGameObject.GetComponent<PlayerInputsScript>();
         playerInputScript.ReceiveDungeonMaster(this);
@@ -48,6 +52,9 @@ public class DungeonMasterScript : MonoBehaviour
         //Le script joueur pour savoir si il a pris des degats
         playerDamageScript = playerGameObject.GetComponent<PlayerDamageScript>();
         playerDamageScript.ReceiveDungeonMaster(this);
+        //Le script qu'on utilise a la toute fin pour celebrer une victoire
+        celebrationScript = GetComponent<CelebrationScript>();
+        celebrationScript.ReceiveDungeonMaster(this, playerGameObject);
     }
 
     /// <summary>
@@ -213,10 +220,25 @@ public class DungeonMasterScript : MonoBehaviour
     /// </summary>
     public void PlayerHasMoved()
     {
+        //On commence par s'assurer qu'on a pas encore fini le niveau
+        EndLevelCheck();
         //Si on a une possibilite d'attaquer, il faut le faire
         if (CheckMovementLegality(playerGameObject.transform.position, playerMoveInput) == 2) OrderPlayerAttack();
         //Sinon on peut lancer la suite de la boucle de gameplay
         else TuilesReset();
+    }
+
+    /// <summary>
+    /// Si on est a la sortie, on lance la celebration de fin de niveau
+    /// </summary>
+    private void EndLevelCheck()
+    {
+        if (Vector3.Distance(playerGameObject.transform.position, stairsPosition) < 0.1f)
+        {
+            DungeonPlannerScript.LevelComplete();
+            playerDamageScript.Celebration();
+            celebrationScript.Celebration();
+        }
     }
 
     /// <summary>
@@ -372,8 +394,25 @@ public class DungeonMasterScript : MonoBehaviour
     {
         //On compte le nombre de squelettes qui ont agis
         skeletonActions++;
+        //On s'assure que le nombre de squelettes est a jour
+        for (int i = skeletonList.Count - 1; i >= 0; i--) if (!skeletonList[i].isActiveAndEnabled)
+            {
+                currentGameObject = skeletonList[i].gameObject;
+                skeletonList.RemoveAt(i);
+                GameObject.Destroy(currentGameObject);
+            }
         //Si tous les squelettes ont agis, on engage la suite de la boucle de gameplay
-        if(skeletonActions == skeletonList.Count) PlayerDistance();
+        if (skeletonActions == skeletonList.Count) StartCoroutine(Pause());
+    }
+
+    /// <summary>
+    /// Pour faire courte pause pour s'assurer que tous les squelettes ont fini
+    /// </summary>
+    /// <returns>Une pause</returns>
+    IEnumerator Pause()
+    {
+        yield return new WaitForSeconds(0.1f);
+        PlayerDistance();
     }
 
     /// <summary>
@@ -383,4 +422,6 @@ public class DungeonMasterScript : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public int GetScore() => scoreScript.GetScore();
 }

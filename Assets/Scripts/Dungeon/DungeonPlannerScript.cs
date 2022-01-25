@@ -5,6 +5,7 @@ using UnityEngine;
 public class DungeonPlannerScript : MonoBehaviour
 {
     //Private statics
+    private static bool reload = false; //Est-ce qu'on recharge le meme niveau ou est-ce que c'est en un autre ?
     private static int levelWidth, levelHeight; //Taille du niveau
     private static Vector2 playerPosition, stairsPosition; //Positions initialies du joueur et du point de sortie
     private static List<Vector2> holesPositions, enemyPositions, treasuresPositions; //Index des tuiles avec un trou, un ennemi ou un tresor
@@ -20,11 +21,20 @@ public class DungeonPlannerScript : MonoBehaviour
     /// </summary>
     public static void DungeonPlanner()
     {
-        BasicGenerator();
-        HolesGenerator();
-        ProblemSolver();
-        EnemiesGenerator();
-        TreasuresGenerator();
+        if (!reload)
+        {
+            reload = true;
+            BasicGenerator();
+            HolesGenerator();
+            ProblemSolver();
+            EnemiesGenerator();
+            TreasuresGenerator();
+        }
+    }
+
+    public static void LevelComplete()
+    {
+        reload = false;
     }
 
     /// <summary>

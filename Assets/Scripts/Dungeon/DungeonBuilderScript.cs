@@ -88,7 +88,7 @@ public class DungeonBuilderScript : MonoBehaviour
         //On place le joueur
         currentGameObject = GameObject.Instantiate(playerPrefab, new Vector3(playerPosition.x, 0, playerPosition.y), Quaternion.identity, currentPlayer.transform);
         dungeonMasterScript = GetComponent<DungeonMasterScript>();
-        dungeonMasterScript.ReceivePlayer(currentGameObject);
+        dungeonMasterScript.ReceivePlayer(currentGameObject, new Vector3(stairsPosition.x, 0, stairsPosition.y));
     }
 
     /// <summary>
