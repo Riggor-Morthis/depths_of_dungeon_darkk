@@ -12,6 +12,31 @@ public abstract class ASkeletonMovementScript : MonoBehaviour
     protected float movingSpeed = 2.5f, attackingSpeed = 5f, rotatingSpeed; //Les vitesses de mouvement et de rotation, respectivement
     protected Vector3 targetPosition; //L'endroit ou on veut aller
     protected bool isAnimating = false; //Indique qu'on est en train de s'animer
+    protected bool intentionAttaque = false; //Est-ce qu'on compte attaquer/quel model on utilise
+    protected GameObject roamModel, attackModel; //Les deux modeles graphiques du squelette
+
+    /// <summary>
+    /// Permet de montrer plus explicitement nos intentions en changeant notre modele lorsqu'on s'apprete a attaquer
+    /// </summary>
+    /// <param name="intention"></param>
+    public void ShowIntention(bool intention)
+    {
+        //Si l'intention actuelle est differente de la derniere, on doit changer de modele
+        if(intention != intentionAttaque)
+        {
+            intentionAttaque = intention;
+            if (intentionAttaque)
+            {
+                roamModel.SetActive(false);
+                attackModel.SetActive(true);
+            }
+            else
+            {
+                attackModel.SetActive(false);
+                roamModel.SetActive(true);
+            }
+        }
+    }
 
     /// <summary>
     /// Recoit le maitre du jeu, et initialise nos variables
@@ -22,6 +47,9 @@ public abstract class ASkeletonMovementScript : MonoBehaviour
         dungeonMasterScript = dms;
         pivotPoint = transform.GetChild(0);
         models = pivotPoint.GetChild(0);
+        roamModel = models.GetChild(0).gameObject;
+        attackModel = models.GetChild(1).gameObject;
+        attackModel.SetActive(false);
     }
 
     /// <summary>
@@ -89,7 +117,9 @@ public abstract class ASkeletonMovementScript : MonoBehaviour
         }
     }
 
-    //Permet de gerer les animations de mouvement de nos squelettes (on integre la rotation dans la translation)
+    /// <summary>
+    /// Permet de gerer les animations de mouvement de nos squelettes (on integre la rotation dans la translation)
+    /// </summary>
     protected void MovementAnimation()
     {
         //Si on est en train de tourner, il faut gerer ce mouvement

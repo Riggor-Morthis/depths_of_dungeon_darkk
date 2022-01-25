@@ -58,6 +58,7 @@ public class MeleeDecisionScript : ASkeletonDecisionScript
         }
 
         //Une fois qu'on a fait un choix, il faut l'afficher
+        skeletonMovementScript.ShowIntention(intentionAttaque);
         CommunicateIntent();
     }
 
@@ -89,7 +90,7 @@ public class MeleeDecisionScript : ASkeletonDecisionScript
         if (!deathAnimation)
         {
             //On demande au maitre du donjon si notre mouvement sera possible
-            if (dungeonMasterScript.CheckSkeletonMovement(GetTarget())) movingAnimation = true; //Il sera possible, donc on s'initialise pour avoir la bonne animation
+            if (dungeonMasterScript.CheckSkeletonMovement(GetTarget(), this)) movingAnimation = true; //Il sera possible, donc on s'initialise pour avoir la bonne animation
             else
             {
                 //Il n'est pas possible, on s'initialise pour ne rien faire et on indique aux autres squelettes qu'on va rester sur place

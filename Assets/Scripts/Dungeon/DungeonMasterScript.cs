@@ -244,6 +244,25 @@ public class DungeonMasterScript : MonoBehaviour
         CollectMoney();
     }
 
+    /// <summary>
+    /// Demande a chacun des tresors dans la scene de savoir si le joueur l'a ramasse ou non
+    /// </summary>
+    private void CollectMoney()
+    {
+        //On inspecte chaque tresor
+        foreach (TreasureScript treasure in treasureList)
+        {
+            if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f)
+                    if (treasure.isActiveAndEnabled) treasure.TreasureCollected();
+        }
+
+        //On peut lancer la suite de la boucle de gameplay
+        SkeletonsActions();
+    }
+
+    /// <summary>
+    /// Permet de demander a chaque squelette de calculer les consequences de ses intentions, puis de lancer les animations
+    /// </summary>
     private void SkeletonsActions()
     {
         //On commence par nettoyer notre liste de squelettes
@@ -255,8 +274,11 @@ public class DungeonMasterScript : MonoBehaviour
                 GameObject.Destroy(currentGameObject);
             }
 
+        //Si il ne reste plus de squelettes dans notre donjon, on peut enclencher la suite
+        if (skeletonList.Count == 0) PlayerDistance();
+
         //On va interroger en priorite les squelettes qui veulent attaquer
-        foreach(ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.GetIntentionAttaque())
+        foreach (ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.GetIntentionAttaque())
             {
                 skeleton.AttackProjection();
             }
@@ -300,12 +322,14 @@ public class DungeonMasterScript : MonoBehaviour
     /// <param name="tuile">L'endroit ou on veut aller</param>
     /// <returns>true si le mouvement va etre possible
     ///          false sinon</returns>
-    public bool CheckSkeletonMovement(Vector3 tuileCible)
+    public bool CheckSkeletonMovement(Vector3 tuileCible, ASkeletonDecisionScript ourself)
     {
         if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f) return false;
         //On cherche les squelettes active qui veulent a la fois se deplacer et qui ne vont pas mourir
-        else foreach(ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled) if (!skeleton.GetDeathAnimation() && !skeleton.GetIntentionAttaque())
-                        if (Vector3.Distance(tuileCible, skeleton.transform.position) < 0.1f) return false;
+        else foreach (ASkeletonDecisionScript skeleton in skeletonList) if (skeleton.isActiveAndEnabled) if (!skeleton.GetDeathAnimation() && !skeleton.GetIntentionAttaque())
+                        //On oublie pas de s'assurer qu'on s'inspecte pas nous meme
+                        if (Vector3.Distance(tuileCible, skeleton.GetTarget()) < 0.1f && skeleton != ourself) return false;
+
         return true;
     }
 
@@ -318,21 +342,5 @@ public class DungeonMasterScript : MonoBehaviour
         skeletonActions++;
         //Si tous les squelettes ont agis, on engage la suite de la boucle de gameplay
         if(skeletonActions == skeletonList.Count) PlayerDistance();
-    }
-
-    /// <summary>
-    /// Demande a chacun des tresors dans la scene de savoir si le joueur l'a ramasse ou non
-    /// </summary>
-    private void CollectMoney()
-    {
-        //On inspecte chaque tresor
-        foreach(TreasureScript treasure in treasureList)
-        {
-            if (treasure.gameObject.activeInHierarchy) if (Vector3.Distance(treasure.transform.position, playerGameObject.transform.position) < 0.1f)
-                    if(treasure.isActiveAndEnabled) treasure.TreasureCollected();
-        }
-
-        //On peut lancer la suite de la boucle de gameplay
-        SkeletonsActions();
     }
 }
