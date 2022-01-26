@@ -22,6 +22,7 @@ public class DungeonBuilderScript : MonoBehaviour
     private List<ASkeletonDecisionScript> skeletonList; //La liste des squelettes dans le niveau
     private List<TreasureScript> treasureList; //La liste des tresors dans le niveau
     private DungeonMasterScript dungeonMasterScript; //Le maitre de ce donjon
+    private int currentInt; //Pour stocker un int temporaire
 
     /// <summary>
     /// La fonction chargee d'assembler les donnes du planner pour avoir un vrai donjon
@@ -120,10 +121,13 @@ public class DungeonBuilderScript : MonoBehaviour
     /// </summary>
     private void PlaceEnemies()
     {
+        currentInt = 0;
         skeletonList = new List<ASkeletonDecisionScript>();
         foreach (Vector2 enemy in enemyPositions)
         {
-            currentGameObject =  GameObject.Instantiate(meleeSkeletonPrefab, new Vector3(enemy.x, 0, enemy.y), Quaternion.identity, currentSkeletons.transform);
+            currentInt++;
+            if(currentInt % 3 == 0) currentGameObject = GameObject.Instantiate(rangedSkeletonPrefab, new Vector3(enemy.x, 0, enemy.y), Quaternion.identity, currentSkeletons.transform);
+            else currentGameObject =  GameObject.Instantiate(meleeSkeletonPrefab, new Vector3(enemy.x, 0, enemy.y), Quaternion.identity, currentSkeletons.transform);
             skeletonList.Add(currentGameObject.GetComponent<ASkeletonDecisionScript>());
         }
         dungeonMasterScript.ReceiveSkeletons(skeletonList);

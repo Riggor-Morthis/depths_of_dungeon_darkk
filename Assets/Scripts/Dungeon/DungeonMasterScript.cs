@@ -146,9 +146,19 @@ public class DungeonMasterScript : MonoBehaviour
 
     public List<Vector2> GetTuileNeighbors(int x, int y) => solDonjon[x, y].GetVoisins();
 
-    public void ChangeTuileColor(int x, int y, bool i)
+    /// <summary>
+    /// Permet de changer la couleur d'une tuile, et indique si cette tuile est dans le quadrillage ou pas
+    /// </summary>
+    /// <param name="x">coordonnee de la tuile</param>
+    /// <param name="y">coordonnee de la tuile</param>
+    /// <param name="i">true si on compte attaquer, false sinon</param>
+    /// <returns>true si la tuile est dans les limites du niveau, false sinon</returns>
+    public bool ChangeTuileColor(int x, int y, bool i)
     {
-        solDonjon[x, y].ChangeColor(i);
+        if (x < 0 || x >= levelWidth) return false;
+        else if (y < 0 || y >= levelHeight) return false;
+        else if (solDonjon[x, y] != null) solDonjon[x, y].ChangeColor(i);
+        return true;
     }
 
     /// <summary>
@@ -268,7 +278,6 @@ public class DungeonMasterScript : MonoBehaviour
     public void AttackTentative(Vector3 tuileCible, bool melee)
     {
         if (melee) audioManager.Play("Melee");
-        else audioManager.Play("Ranged");
 
         if (Vector3.Distance(tuileCible, playerGameObject.transform.position) < 0.1f)
         {
@@ -385,6 +394,17 @@ public class DungeonMasterScript : MonoBehaviour
     }
 
     /// <summary>
+    /// Necessaire pour arreter les tirs des squelettes distance au premier joueur trouve
+    /// </summary>
+    /// <param name="tuileCible">La ou on veut tirer</param>
+    /// <returns>true si il y a un joueur, false sinon</returns>
+    public bool CheckSkeletonRangedTarget(Vector3 tuileCible)
+    {
+        if (Vector3.Distance(playerGameObject.transform.position, tuileCible) < 0.1f) return true;
+        return false;
+    }
+
+    /// <summary>
     /// Fonctionne similairement a la legalite des mouvements, sauf que :
     /// on sait deja que le mouvement est legal, donc on check pas la grille
     /// on ne veut pas rentrer dans le joueur, donc on check sa position actuelle
@@ -454,4 +474,6 @@ public class DungeonMasterScript : MonoBehaviour
     }
 
     public int GetScore() => scoreScript.GetScore();
+
+    public Vector3 GetPlayerPosition() => playerGameObject.transform.position;
 }
