@@ -1,0 +1,705 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+// 0x00000001 System.Void AudioManagerScript::Awake()
+extern void AudioManagerScript_Awake_m37C0D1EF88F6AB8305893A771CC8421CD19B524B (void);
+// 0x00000002 System.Void AudioManagerScript::Play(System.String)
+extern void AudioManagerScript_Play_mBEDA9DF373092AA535F3D569B0F55CDEE7376AB3 (void);
+// 0x00000003 System.Void AudioManagerScript::.ctor()
+extern void AudioManagerScript__ctor_mA566A89543B2EF8D17CBB810E2EF2477E34C3B98 (void);
+// 0x00000004 System.Void AudioManagerScript/<>c::.cctor()
+extern void U3CU3Ec__cctor_m6B560DE9437467102B4BD03DD9EC9FE85DE4AB8F (void);
+// 0x00000005 System.Void AudioManagerScript/<>c::.ctor()
+extern void U3CU3Ec__ctor_m6AA71321A4D0CD1155CBF9A09805AF0F2ED83926 (void);
+// 0x00000006 System.Boolean AudioManagerScript/<>c::<Awake>b__3_0(Sound)
+extern void U3CU3Ec_U3CAwakeU3Eb__3_0_m86697ADC3DF809FB82CB602427507DFBD3EF7980 (void);
+// 0x00000007 System.Void AudioManagerScript/<>c__DisplayClass4_0::.ctor()
+extern void U3CU3Ec__DisplayClass4_0__ctor_m8A76C96A1398EC9AC692BAA8BC10687C7E0455B7 (void);
+// 0x00000008 System.Boolean AudioManagerScript/<>c__DisplayClass4_0::<Play>b__0(Sound)
+extern void U3CU3Ec__DisplayClass4_0_U3CPlayU3Eb__0_m059407D62F52121CF0339F179DCC7470F81C83D2 (void);
+// 0x00000009 System.Void Sound::.ctor()
+extern void Sound__ctor_m77B8AC57B05BAFE4B82F0152728047D3EDBE3CCC (void);
+// 0x0000000A System.Void ButtonScipt::NextScene()
+extern void ButtonScipt_NextScene_mD607D562E52104A0B24D8E94A5AE388E52293202 (void);
+// 0x0000000B System.Void ButtonScipt::.ctor()
+extern void ButtonScipt__ctor_m8A99976A686C2B31D2A80D0C0768B31156DE7CBD (void);
+// 0x0000000C System.Void DungeonBuilderScript::DungeonBuilder()
+extern void DungeonBuilderScript_DungeonBuilder_mC9AB264E0976E3ED09A29BA844839975C62BE29E (void);
+// 0x0000000D System.Void DungeonBuilderScript::GetPlannedFloor()
+extern void DungeonBuilderScript_GetPlannedFloor_mB574399654D28CB886B8C75C95A5FDE6287D5A10 (void);
+// 0x0000000E System.Void DungeonBuilderScript::BuildFloor()
+extern void DungeonBuilderScript_BuildFloor_m6AC1C9251FAFFC94550466772CD8995B6D47E628 (void);
+// 0x0000000F System.Void DungeonBuilderScript::LinkNeighbors()
+extern void DungeonBuilderScript_LinkNeighbors_mD01219C8743FCE4414216A7BCF440D1736A3E5B6 (void);
+// 0x00000010 System.Void DungeonBuilderScript::PlaceEnemies()
+extern void DungeonBuilderScript_PlaceEnemies_mF8EE28339C394476E1738F13EDEC04BEB78FE778 (void);
+// 0x00000011 System.Void DungeonBuilderScript::PlaceTreasures()
+extern void DungeonBuilderScript_PlaceTreasures_mAB692E7090B9B88BA3AC9C1AF70C896C8E5E38A3 (void);
+// 0x00000012 System.Void DungeonBuilderScript::.ctor()
+extern void DungeonBuilderScript__ctor_mCF044209CE491F427401E0BBA1AF0A6798493BDB (void);
+// 0x00000013 System.Void DungeonMasterScript::Start()
+extern void DungeonMasterScript_Start_m9F65D68D5BC67409BA65811C55D4189C84D8B445 (void);
+// 0x00000014 System.Void DungeonMasterScript::ReceivePlayer(UnityEngine.GameObject,UnityEngine.Vector3)
+extern void DungeonMasterScript_ReceivePlayer_m20DC843971CA19CBB72601F80D2B5DDDC72F9FE8 (void);
+// 0x00000015 System.Void DungeonMasterScript::ReceiveFloor(FloorScript[0...,0...],System.Int32,System.Int32)
+extern void DungeonMasterScript_ReceiveFloor_m08B45CF05FB29D53185A9BF7C71038BEC369687A (void);
+// 0x00000016 System.Void DungeonMasterScript::ReceiveSkeletons(System.Collections.Generic.List`1<ASkeletonDecisionScript>)
+extern void DungeonMasterScript_ReceiveSkeletons_mF553663F0FCF1D15CFC63342ED2279B0458D34C6 (void);
+// 0x00000017 System.Void DungeonMasterScript::ReceiveTreasures(System.Collections.Generic.List`1<TreasureScript>)
+extern void DungeonMasterScript_ReceiveTreasures_mF802F14A480EC6C7C176DEE60B12AFA396B35EB2 (void);
+// 0x00000018 System.Void DungeonMasterScript::PlayerDistance()
+extern void DungeonMasterScript_PlayerDistance_mF6FDD28EAAFA1E0EA0E076B6AC810469BFB6618C (void);
+// 0x00000019 System.Void DungeonMasterScript::SkeletonDecisions()
+extern void DungeonMasterScript_SkeletonDecisions_mC9CF4444197EAD00DA66CFA099A90CB6ABB0E833 (void);
+// 0x0000001A System.Int32 DungeonMasterScript::GetTuileDistance(System.Int32,System.Int32)
+extern void DungeonMasterScript_GetTuileDistance_mEBAB0317D8ECD5091EDAC06E408D4C0AFAEC0423 (void);
+// 0x0000001B System.Collections.Generic.List`1<UnityEngine.Vector2> DungeonMasterScript::GetTuileNeighbors(System.Int32,System.Int32)
+extern void DungeonMasterScript_GetTuileNeighbors_m7785A27700CCE907267BA02EB2E14D3046F95D63 (void);
+// 0x0000001C System.Boolean DungeonMasterScript::ChangeTuileColor(System.Int32,System.Int32,System.Boolean)
+extern void DungeonMasterScript_ChangeTuileColor_mB8A9B4361F870AB1FB52A5594797CA687B7BADEF (void);
+// 0x0000001D System.Void DungeonMasterScript::AllowPlayerMovement(System.Boolean)
+extern void DungeonMasterScript_AllowPlayerMovement_m2D4DAE498824F56BAE556490782CC5850BD2FA89 (void);
+// 0x0000001E System.Void DungeonMasterScript::ReceiveInput(UnityEngine.Vector3)
+extern void DungeonMasterScript_ReceiveInput_m566314F9FDDC41F0DA01FD8F9E0BF28C25550616 (void);
+// 0x0000001F System.Int32 DungeonMasterScript::CheckMovementLegality(UnityEngine.Vector3,UnityEngine.Vector3)
+extern void DungeonMasterScript_CheckMovementLegality_m15D853FA76C5BFCAE157412B00929D363A6620B0 (void);
+// 0x00000020 System.Void DungeonMasterScript::OrderPlayerMovement()
+extern void DungeonMasterScript_OrderPlayerMovement_m6D75035A901D2B41DA1D669D56E17AB3AB91A4F3 (void);
+// 0x00000021 System.Void DungeonMasterScript::OrderPlayerAttack()
+extern void DungeonMasterScript_OrderPlayerAttack_mEC83F6D94DE3971D0593D698514BD906EFC025EC (void);
+// 0x00000022 System.Void DungeonMasterScript::PlayerHasMoved()
+extern void DungeonMasterScript_PlayerHasMoved_m1315AB7971EB53F979B626DBEEC74C55D1B8AB96 (void);
+// 0x00000023 System.Void DungeonMasterScript::EndLevelCheck()
+extern void DungeonMasterScript_EndLevelCheck_m66A384B7EE95329BC53D3FD99E11B2722FA253D3 (void);
+// 0x00000024 System.Void DungeonMasterScript::PlayerHasAttacked()
+extern void DungeonMasterScript_PlayerHasAttacked_m9852FB4667CDC24EB9467AC784896698087E9CD0 (void);
+// 0x00000025 System.Void DungeonMasterScript::AttackTentative(UnityEngine.Vector3,System.Boolean)
+extern void DungeonMasterScript_AttackTentative_m2D7F18325076B68C6D04010DBE6C2DA88023C085 (void);
+// 0x00000026 System.Void DungeonMasterScript::TuilesReset()
+extern void DungeonMasterScript_TuilesReset_m591E82381E488C798036AAAEE02E9D89C42AD580 (void);
+// 0x00000027 System.Void DungeonMasterScript::CollectMoney()
+extern void DungeonMasterScript_CollectMoney_m6772A1955D5885E6E9C06E3F9D68DECDC4F606D2 (void);
+// 0x00000028 System.Void DungeonMasterScript::SkeletonsActions()
+extern void DungeonMasterScript_SkeletonsActions_m780BEF904BAD274F2CF869B1FFF2B2291B781AFE (void);
+// 0x00000029 System.Boolean DungeonMasterScript::CheckSkeletonTarget(UnityEngine.Vector3)
+extern void DungeonMasterScript_CheckSkeletonTarget_m8110F638CD68FAE43D0A8C0B4676434287D946EC (void);
+// 0x0000002A System.Boolean DungeonMasterScript::CheckSkeletonRangedTarget(UnityEngine.Vector3)
+extern void DungeonMasterScript_CheckSkeletonRangedTarget_m2938592A7A9B1842B3E59E860F031761AE5013F1 (void);
+// 0x0000002B System.Boolean DungeonMasterScript::CheckSkeletonMovement(UnityEngine.Vector3,ASkeletonDecisionScript)
+extern void DungeonMasterScript_CheckSkeletonMovement_mD2DC39CB5FB28FEC753AA72CE3AACF531AD82C25 (void);
+// 0x0000002C System.Void DungeonMasterScript::SkeletonHasActed()
+extern void DungeonMasterScript_SkeletonHasActed_m8F3D502E826B55DF54A770238212F7EC20D7D165 (void);
+// 0x0000002D System.Collections.IEnumerator DungeonMasterScript::Pause()
+extern void DungeonMasterScript_Pause_m7DF69A8A591040FCFF01A397D91EE64122589E24 (void);
+// 0x0000002E System.Void DungeonMasterScript::ReloadScene()
+extern void DungeonMasterScript_ReloadScene_mFCAFA7C6D9A51949CB656C757019003E3B931607 (void);
+// 0x0000002F System.Int32 DungeonMasterScript::GetScore()
+extern void DungeonMasterScript_GetScore_mB23EC2EB39893AE839E01605C73023169FD6964B (void);
+// 0x00000030 UnityEngine.Vector3 DungeonMasterScript::GetPlayerPosition()
+extern void DungeonMasterScript_GetPlayerPosition_mFD11B37CE71AEA171476C0D6A09F3E9C093DC838 (void);
+// 0x00000031 System.Void DungeonMasterScript::.ctor()
+extern void DungeonMasterScript__ctor_m49E9F503811FC9F43BDCD92D684C228D3CB12903 (void);
+// 0x00000032 System.Void DungeonMasterScript/<Pause>d__49::.ctor(System.Int32)
+extern void U3CPauseU3Ed__49__ctor_mDCA4DA32429295F19E08E1B6BFA6531F251B044B (void);
+// 0x00000033 System.Void DungeonMasterScript/<Pause>d__49::System.IDisposable.Dispose()
+extern void U3CPauseU3Ed__49_System_IDisposable_Dispose_m6CBDABE6FDB050E530F3A2DFAB92D3517C65375B (void);
+// 0x00000034 System.Boolean DungeonMasterScript/<Pause>d__49::MoveNext()
+extern void U3CPauseU3Ed__49_MoveNext_m89C1CAFFF94D512C4EEE5714776C107B89EE5A7F (void);
+// 0x00000035 System.Object DungeonMasterScript/<Pause>d__49::System.Collections.Generic.IEnumerator<System.Object>.get_Current()
+extern void U3CPauseU3Ed__49_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m90598DA75ECC19B6CD9B550CA03B528EBC082F8F (void);
+// 0x00000036 System.Void DungeonMasterScript/<Pause>d__49::System.Collections.IEnumerator.Reset()
+extern void U3CPauseU3Ed__49_System_Collections_IEnumerator_Reset_m687E84310D3175FADBDD225790357BDFFE42DAE2 (void);
+// 0x00000037 System.Object DungeonMasterScript/<Pause>d__49::System.Collections.IEnumerator.get_Current()
+extern void U3CPauseU3Ed__49_System_Collections_IEnumerator_get_Current_m1F6F8D582411D5D488EB1CF1DA19DD7CDD7B9996 (void);
+// 0x00000038 System.Void DungeonPlannerScript::DungeonPlanner()
+extern void DungeonPlannerScript_DungeonPlanner_m8996C26BFD8829D7ED28FE15BBDFC09BCD3CA905 (void);
+// 0x00000039 System.Void DungeonPlannerScript::LevelComplete()
+extern void DungeonPlannerScript_LevelComplete_m268CB59209A497608181A07129CE486FE6808EE8 (void);
+// 0x0000003A System.Void DungeonPlannerScript::BasicGenerator()
+extern void DungeonPlannerScript_BasicGenerator_m136DCB1859EAD0DBF79015C6AB3D35639F971B4C (void);
+// 0x0000003B System.Void DungeonPlannerScript::HolesGenerator()
+extern void DungeonPlannerScript_HolesGenerator_mB61710BDE629E3A73A27ADB12F8B417C0038774E (void);
+// 0x0000003C System.Void DungeonPlannerScript::ProblemSolver()
+extern void DungeonPlannerScript_ProblemSolver_m48EB2124D6782F306FC98EA8A65133813CD5FD43 (void);
+// 0x0000003D System.Void DungeonPlannerScript::EnemiesGenerator()
+extern void DungeonPlannerScript_EnemiesGenerator_m5299454DCC2ADDDD1C7872D9BCA5627C0035EA43 (void);
+// 0x0000003E System.Void DungeonPlannerScript::TreasuresGenerator()
+extern void DungeonPlannerScript_TreasuresGenerator_m15084E5D1CAC357425C8DDF28550DABF8E0E8748 (void);
+// 0x0000003F System.Int32 DungeonPlannerScript::getLevelWidth()
+extern void DungeonPlannerScript_getLevelWidth_m9B0357A21BA207CE67716F86B166FC97D8964F3B (void);
+// 0x00000040 System.Int32 DungeonPlannerScript::getLevelHeight()
+extern void DungeonPlannerScript_getLevelHeight_m8BD8BF111A10A11B9367262D25A2A76839DDA011 (void);
+// 0x00000041 UnityEngine.Vector2 DungeonPlannerScript::getPlayerPosition()
+extern void DungeonPlannerScript_getPlayerPosition_m4E88E1A978DD92CC4C33288C916583503F924A0F (void);
+// 0x00000042 UnityEngine.Vector2 DungeonPlannerScript::getStairsPosition()
+extern void DungeonPlannerScript_getStairsPosition_mAB0E4480F04C852319E90E638073E10927C37642 (void);
+// 0x00000043 System.Collections.Generic.List`1<UnityEngine.Vector2> DungeonPlannerScript::getHolesPositions()
+extern void DungeonPlannerScript_getHolesPositions_m3A4833AE8E06C0259BB8CD887506F46CF8F0E89D (void);
+// 0x00000044 System.Collections.Generic.List`1<UnityEngine.Vector2> DungeonPlannerScript::getEnemyPositions()
+extern void DungeonPlannerScript_getEnemyPositions_mB2990C68FE36435284EC1603FEDBFF4AB2BAC862 (void);
+// 0x00000045 System.Collections.Generic.List`1<UnityEngine.Vector2> DungeonPlannerScript::getTreasuresPositions()
+extern void DungeonPlannerScript_getTreasuresPositions_mCDF7E9964ECA34530F6334FAEC1377CBCC6A74C7 (void);
+// 0x00000046 System.Void DungeonPlannerScript::.ctor()
+extern void DungeonPlannerScript__ctor_m3621469C414CE1CBE97CC71D9E4E919FD82B17C8 (void);
+// 0x00000047 System.Void DungeonPlannerScript::.cctor()
+extern void DungeonPlannerScript__cctor_mD91B7EA0EFEF2718ADC8CA5E53B6162766736897 (void);
+// 0x00000048 System.Void FloorScript::Initialize(System.Int32,System.Boolean)
+extern void FloorScript_Initialize_mA9CF7580467C2B744AD68B365C1C2012AE3719C5 (void);
+// 0x00000049 System.Void FloorScript::ChangeColor(UnityEngine.Color)
+extern void FloorScript_ChangeColor_m0C1DFDD5F265E1D9E10D6DB462C64F2265345B3A (void);
+// 0x0000004A System.Void FloorScript::ChangeColor(System.Boolean)
+extern void FloorScript_ChangeColor_m1928E01AA9B217D1BEB3C17364F385C7B36812D4 (void);
+// 0x0000004B System.Void FloorScript::ResetColor()
+extern void FloorScript_ResetColor_m2C9D3F864B3C8A76620F99F903C36369B02C7E03 (void);
+// 0x0000004C System.Void FloorScript::AddNeighbor(UnityEngine.Vector2)
+extern void FloorScript_AddNeighbor_m8BB65790DBF0DDD4779C7D7FCE28BE05FF6831EA (void);
+// 0x0000004D System.Collections.Generic.List`1<UnityEngine.Vector2> FloorScript::SetDistance(System.Int32)
+extern void FloorScript_SetDistance_m613D89803030D7C7D2EACE50D08BFC992FCC78CD (void);
+// 0x0000004E System.Int32 FloorScript::GetDistance()
+extern void FloorScript_GetDistance_mECA8A6CD603E72720A63910B965F126C37D6F0EF (void);
+// 0x0000004F System.Collections.Generic.List`1<UnityEngine.Vector2> FloorScript::GetVoisins()
+extern void FloorScript_GetVoisins_m811E923EB94ABADB47F99CA43C96A8F3574A0157 (void);
+// 0x00000050 System.Void FloorScript::.ctor()
+extern void FloorScript__ctor_mA33B4B0548D87934E388C4A4FA1E09E88BDCA884 (void);
+// 0x00000051 System.Void ADamageableScript::GetDamaged()
+// 0x00000052 System.Void ADamageableScript::.ctor()
+extern void ADamageableScript__ctor_mC49155C17876357C3A2C4DC90A0BCF27AF11131F (void);
+// 0x00000053 System.Void PlayerInputsScript::Start()
+extern void PlayerInputsScript_Start_mBDE121DB28E0A46D9DC25D98F688B396936E273F (void);
+// 0x00000054 System.Void PlayerInputsScript::Update()
+extern void PlayerInputsScript_Update_m58A5CAB97DF3FA7D86445542B5980DB2D65F5DB4 (void);
+// 0x00000055 System.Void PlayerInputsScript::CalculateMouseVector()
+extern void PlayerInputsScript_CalculateMouseVector_m63CEBEC7BE5BB724023267E575748A57E437DC5E (void);
+// 0x00000056 System.Void PlayerInputsScript::GiveInput()
+extern void PlayerInputsScript_GiveInput_m1A65ADAFA293D6B6974D42C2705BFDE1BFA27FC7 (void);
+// 0x00000057 System.Void PlayerInputsScript::ReceiveDungeonMaster(DungeonMasterScript)
+extern void PlayerInputsScript_ReceiveDungeonMaster_m983557A18C01C185EA23B9CA7FB6A6204115C6B8 (void);
+// 0x00000058 System.Void PlayerInputsScript::.ctor()
+extern void PlayerInputsScript__ctor_m5B5903435CEE62891342F011A147832806C61014 (void);
+// 0x00000059 System.Void PlayerMovementScript::ReceiveDungeonMaster(DungeonMasterScript)
+extern void PlayerMovementScript_ReceiveDungeonMaster_m64BC354BC225313F4CF5ABD533683C610C01B365 (void);
+// 0x0000005A System.Void PlayerMovementScript::ReceiveMoveInstruction(UnityEngine.Vector3)
+extern void PlayerMovementScript_ReceiveMoveInstruction_m7D285E212330356F664CB43841ED600A8F81EA78 (void);
+// 0x0000005B System.Void PlayerMovementScript::ReceiveAttackInstruction(UnityEngine.Vector3)
+extern void PlayerMovementScript_ReceiveAttackInstruction_m593DC4151E85E1975CE107D30D423AFCB23F5151 (void);
+// 0x0000005C System.Void PlayerMovementScript::ShouldWeRotate()
+extern void PlayerMovementScript_ShouldWeRotate_m489A331571500C4FF939A448D4193873A7A0B58E (void);
+// 0x0000005D System.Void PlayerMovementScript::Update()
+extern void PlayerMovementScript_Update_m713981A4E5F649B034B48D1D397760F16C81069F (void);
+// 0x0000005E System.Single PlayerMovementScript::ElevationAccordingToDistance()
+extern void PlayerMovementScript_ElevationAccordingToDistance_m8CD222D6B5E528A1521164ED5274826F9175804C (void);
+// 0x0000005F System.Void PlayerMovementScript::.ctor()
+extern void PlayerMovementScript__ctor_mA04EAE348CBD314F429CD012CBB0F9D446C499B5 (void);
+// 0x00000060 System.Void PlayerDamageScript::ReceiveDungeonMaster(DungeonMasterScript,AudioManagerScript)
+extern void PlayerDamageScript_ReceiveDungeonMaster_m170687E054BF01A4ACB651CA261A2FF1DE48B1C5 (void);
+// 0x00000061 System.Void PlayerDamageScript::GetDamaged()
+extern void PlayerDamageScript_GetDamaged_m9302BE75D37E2E063C85076B14FF79F2E18F05BE (void);
+// 0x00000062 System.Boolean PlayerDamageScript::HelmetChange(System.Boolean)
+extern void PlayerDamageScript_HelmetChange_m17B31E087722B6E4E2C3BBDEAC2EF7CD61BB8C76 (void);
+// 0x00000063 System.Void PlayerDamageScript::Celebration()
+extern void PlayerDamageScript_Celebration_m89DFD8D9F000966160DF9817E07545C0437E42DE (void);
+// 0x00000064 System.Void PlayerDamageScript::.ctor()
+extern void PlayerDamageScript__ctor_m601C516FE61610AE44B0F3D95D9553D38B3E8567 (void);
+// 0x00000065 System.Void SkeletonDamageableScript::Awake()
+extern void SkeletonDamageableScript_Awake_m87592F92E9267C9C465D3ACCA6CB20E730C4FB26 (void);
+// 0x00000066 System.Void SkeletonDamageableScript::GetDamaged()
+extern void SkeletonDamageableScript_GetDamaged_m5ADC974253C7674C68D046DDF371CB2F658625C0 (void);
+// 0x00000067 System.Void SkeletonDamageableScript::.ctor()
+extern void SkeletonDamageableScript__ctor_mF227A092EEB0C38C5E8650E64FA7261C77511341 (void);
+// 0x00000068 System.Void ASkeletonDecisionScript::ReceiveDungeonMaster(DungeonMasterScript)
+extern void ASkeletonDecisionScript_ReceiveDungeonMaster_m76F46F5FB2241D76D0171564A835EFC790114BAE (void);
+// 0x00000069 System.Void ASkeletonDecisionScript::DecisionMaking()
+// 0x0000006A System.Void ASkeletonDecisionScript::ResetAnimations()
+extern void ASkeletonDecisionScript_ResetAnimations_mA115E996FD757D8E1AB352B97FF6F5EADEA3311F (void);
+// 0x0000006B System.Void ASkeletonDecisionScript::AttackProjection()
+// 0x0000006C System.Void ASkeletonDecisionScript::MovementProjection()
+extern void ASkeletonDecisionScript_MovementProjection_m6CBA18FCF83C508F694079752485F8A9B45D247A (void);
+// 0x0000006D System.Void ASkeletonDecisionScript::LaunchAnimation()
+extern void ASkeletonDecisionScript_LaunchAnimation_m6CF817C2AD23C6A953B827A58F7604591CC798EE (void);
+// 0x0000006E System.Void ASkeletonDecisionScript::YouWillDie()
+extern void ASkeletonDecisionScript_YouWillDie_m27AED32E1E6D1924CB3DA70FB91239EAB5FCC7AB (void);
+// 0x0000006F System.Boolean ASkeletonDecisionScript::GetIntentionAttaque()
+extern void ASkeletonDecisionScript_GetIntentionAttaque_mF84842D987A3D5DE6396BFDA944D0C665C81FE10 (void);
+// 0x00000070 System.Boolean ASkeletonDecisionScript::GetDeathAnimation()
+extern void ASkeletonDecisionScript_GetDeathAnimation_m3260CDE0443E36DC59623A2F92A47918C279344B (void);
+// 0x00000071 UnityEngine.Vector3 ASkeletonDecisionScript::GetTarget()
+extern void ASkeletonDecisionScript_GetTarget_mE4D961B412F2A6777A8EEE3368B42CC93B22BBAA (void);
+// 0x00000072 System.Void ASkeletonDecisionScript::Roam()
+extern void ASkeletonDecisionScript_Roam_m271BEE9DC1CB0C301DBF64DAF8790CEE53694A8C (void);
+// 0x00000073 System.Void ASkeletonDecisionScript::CloserToThePlayer()
+extern void ASkeletonDecisionScript_CloserToThePlayer_mF19B0A2EE61ED61B6AC5EF16D50F451940AE847A (void);
+// 0x00000074 System.Void ASkeletonDecisionScript::CommunicateIntent()
+// 0x00000075 System.Void ASkeletonDecisionScript::.ctor()
+extern void ASkeletonDecisionScript__ctor_m76A06AF5C0505312064A3461ED8B9C4A3323A928 (void);
+// 0x00000076 System.Void ASkeletonMovementScript::ShowIntention(System.Boolean)
+extern void ASkeletonMovementScript_ShowIntention_m26FD353DCA356341B83334DA62BDCBC116C3FF6E (void);
+// 0x00000077 System.Void ASkeletonMovementScript::ReceiveDungeonMaster(DungeonMasterScript)
+extern void ASkeletonMovementScript_ReceiveDungeonMaster_m08B3F3D9D7244D207973C37E486567B7440D8D48 (void);
+// 0x00000078 System.Void ASkeletonMovementScript::IsAnimatingNothing()
+extern void ASkeletonMovementScript_IsAnimatingNothing_mAAAFE32F4A099695C3FF3BA8BBC8F69230B19AF6 (void);
+// 0x00000079 System.Void ASkeletonMovementScript::IsAnimatingMovement(UnityEngine.Vector3)
+extern void ASkeletonMovementScript_IsAnimatingMovement_mF41E1330BDE458F9CEFE5D3A49EB566ED9025C6C (void);
+// 0x0000007A System.Void ASkeletonMovementScript::IsAnimatingAttack(UnityEngine.Vector3)
+// 0x0000007B System.Void ASkeletonMovementScript::ShouldWeRotate()
+extern void ASkeletonMovementScript_ShouldWeRotate_m1B86ED8125F02B730F564261827498B464DF6CA6 (void);
+// 0x0000007C System.Void ASkeletonMovementScript::Update()
+extern void ASkeletonMovementScript_Update_m89DB9A95D3C0606D04471615B3DB486CD518D821 (void);
+// 0x0000007D System.Void ASkeletonMovementScript::MovementAnimation()
+extern void ASkeletonMovementScript_MovementAnimation_m6A915B93E19109B29F2798FD08B1019963036BD4 (void);
+// 0x0000007E System.Single ASkeletonMovementScript::ElevationAccordingToDistance()
+extern void ASkeletonMovementScript_ElevationAccordingToDistance_mCE7305658877F08BABA821328F2201B79F072F31 (void);
+// 0x0000007F System.Void ASkeletonMovementScript::AttackAnimation()
+// 0x00000080 System.Void ASkeletonMovementScript::.ctor()
+extern void ASkeletonMovementScript__ctor_m54660F4AD5AE9F81C36D3EFD5742233E116C3663 (void);
+// 0x00000081 System.Void MeleeDecisionScript::DecisionMaking()
+extern void MeleeDecisionScript_DecisionMaking_m79827B62270ADDDFE1144BC26836D44BCFBE8FA6 (void);
+// 0x00000082 System.Void MeleeDecisionScript::CommunicateIntent()
+extern void MeleeDecisionScript_CommunicateIntent_mE5BAE82F1EA9E091EF86568BC80570DA23FEC400 (void);
+// 0x00000083 System.Void MeleeDecisionScript::AttackProjection()
+extern void MeleeDecisionScript_AttackProjection_m8037006F2301F179A09202E8C72F00B3C8334F58 (void);
+// 0x00000084 System.Void MeleeDecisionScript::.ctor()
+extern void MeleeDecisionScript__ctor_m6ACF4BF9DE0C7695F41136FC870E6FEC76A4F70C (void);
+// 0x00000085 System.Void MeleeMovementScript::IsAnimatingAttack(UnityEngine.Vector3)
+extern void MeleeMovementScript_IsAnimatingAttack_m3D0B662AFC470437C607C12A54389A05D93E9E01 (void);
+// 0x00000086 System.Void MeleeMovementScript::AttackAnimation()
+extern void MeleeMovementScript_AttackAnimation_m9695C2AB049C1C060D82E1303ECC04F31D085FDE (void);
+// 0x00000087 System.Void MeleeMovementScript::.ctor()
+extern void MeleeMovementScript__ctor_m404D92E72864F7F037F99ADBB8C2A7679DA81E2C (void);
+// 0x00000088 System.Void RangedDecisionScript::DecisionMaking()
+extern void RangedDecisionScript_DecisionMaking_mCFC8450A1F8051571D2EB995D52C7F9BD46C5E4E (void);
+// 0x00000089 System.Void RangedDecisionScript::CommunicateIntent()
+extern void RangedDecisionScript_CommunicateIntent_m5A42B08F6EB1A7E95FEF70F9B2FD6873C9EB2D62 (void);
+// 0x0000008A System.Void RangedDecisionScript::AttackProjection()
+extern void RangedDecisionScript_AttackProjection_m13B7401F967BF6DBF59DADD103FCE4669D20B57A (void);
+// 0x0000008B System.Void RangedDecisionScript::.ctor()
+extern void RangedDecisionScript__ctor_m38846684C64D6CFD9E89607B921584B457BE7482 (void);
+// 0x0000008C System.Void RangedMovementScript::Awake()
+extern void RangedMovementScript_Awake_m420E79D8CC0D8BB64733D9F0FB7215805AA04EAB (void);
+// 0x0000008D System.Void RangedMovementScript::IsAnimatingAttack(UnityEngine.Vector3)
+extern void RangedMovementScript_IsAnimatingAttack_m6CFE2ADFD13CC51C6F1BD3107AF2EE1449EE1010 (void);
+// 0x0000008E System.Void RangedMovementScript::AttackAnimation()
+extern void RangedMovementScript_AttackAnimation_m336CCF794721A10E0EAEF757CCC8ABA5156709EA (void);
+// 0x0000008F System.Void RangedMovementScript::.ctor()
+extern void RangedMovementScript__ctor_m0DEEC0177281DDB1D635907BA9AC54C1817821E1 (void);
+// 0x00000090 System.Void ParticleScript::Awake()
+extern void ParticleScript_Awake_m47240E242AA18D304EA2ACF8078AE14510CEBCEA (void);
+// 0x00000091 System.Void ParticleScript::Update()
+extern void ParticleScript_Update_m0441557DCF94E99AD99730030F04034FBCA3E149 (void);
+// 0x00000092 System.Void ParticleScript::.ctor()
+extern void ParticleScript__ctor_m11B6C07DE97294DE482C162EEC222D6116F07B93 (void);
+// 0x00000093 System.Void TreasureScript::Awake()
+extern void TreasureScript_Awake_m15DAA9C85E2ECAFC9E4C17752CB681B4945948F9 (void);
+// 0x00000094 System.Void TreasureScript::TreasureCollected()
+extern void TreasureScript_TreasureCollected_mDAA6782CF2F12880BB1F61A691A87C66D355BA45 (void);
+// 0x00000095 System.Void TreasureScript::.ctor()
+extern void TreasureScript__ctor_m6EBC3E1BA6EAF7A67712F081EC433BCF2C9F15C9 (void);
+// 0x00000096 System.Void CelebrationScript::ReceiveDungeonMaster(DungeonMasterScript,UnityEngine.GameObject,AudioManagerScript)
+extern void CelebrationScript_ReceiveDungeonMaster_m97CF4852408E2C9D2FD432AB199279BB39A1AB1B (void);
+// 0x00000097 System.Void CelebrationScript::Celebration()
+extern void CelebrationScript_Celebration_mB639DD27AD94355CCED0F6FA311587E357A242F0 (void);
+// 0x00000098 System.Void CelebrationScript::Update()
+extern void CelebrationScript_Update_m3EE0E8438DA21D70E67438261995F98C36198B65 (void);
+// 0x00000099 System.Collections.IEnumerator CelebrationScript::Pause()
+extern void CelebrationScript_Pause_m335CEC540CDDF179F864B315F67044B1110CC31D (void);
+// 0x0000009A System.Void CelebrationScript::.ctor()
+extern void CelebrationScript__ctor_m8AEE3FB7EC9693B52EC5E1DA7C169C5C802477A6 (void);
+// 0x0000009B System.Void CelebrationScript/<Pause>d__12::.ctor(System.Int32)
+extern void U3CPauseU3Ed__12__ctor_mA7E797D2BE41CBD005C17BAA1C210859DFBE347F (void);
+// 0x0000009C System.Void CelebrationScript/<Pause>d__12::System.IDisposable.Dispose()
+extern void U3CPauseU3Ed__12_System_IDisposable_Dispose_m01F9E45C6AA059A47E23A9AD5E6ACAB2221B5DBD (void);
+// 0x0000009D System.Boolean CelebrationScript/<Pause>d__12::MoveNext()
+extern void U3CPauseU3Ed__12_MoveNext_mFFA53200CD0BC8FAF090A857B857A4629043C478 (void);
+// 0x0000009E System.Object CelebrationScript/<Pause>d__12::System.Collections.Generic.IEnumerator<System.Object>.get_Current()
+extern void U3CPauseU3Ed__12_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mE9560CBD21084A42AC3AD1982EE42408B1259B9D (void);
+// 0x0000009F System.Void CelebrationScript/<Pause>d__12::System.Collections.IEnumerator.Reset()
+extern void U3CPauseU3Ed__12_System_Collections_IEnumerator_Reset_m326D241857D71EA4BD7415AC73271BB4023816E8 (void);
+// 0x000000A0 System.Object CelebrationScript/<Pause>d__12::System.Collections.IEnumerator.get_Current()
+extern void U3CPauseU3Ed__12_System_Collections_IEnumerator_get_Current_m762CC6804F19BDA63FA61AEEFD9529D953BBB104 (void);
+// 0x000000A1 System.Void ScoreModifierScript::Awake()
+extern void ScoreModifierScript_Awake_m5326554296B79BF1D98094C2FFD11E483C330F0A (void);
+// 0x000000A2 System.Void ScoreModifierScript::ChangeScore(System.Int32)
+extern void ScoreModifierScript_ChangeScore_m0783CFF52E0892F201A4BCF29716D4099049D81A (void);
+// 0x000000A3 System.Void ScoreModifierScript::Reset()
+extern void ScoreModifierScript_Reset_m9E9918C98D7E68C3313E2850105B9421DA7C6304 (void);
+// 0x000000A4 System.Void ScoreModifierScript::Update()
+extern void ScoreModifierScript_Update_m823F30D2B2AA08FD87F0A22A4ACC981B2EBDD231 (void);
+// 0x000000A5 System.Void ScoreModifierScript::UpdateUI()
+extern void ScoreModifierScript_UpdateUI_mFFCCC46536264FF17848988726A4FE503F254681 (void);
+// 0x000000A6 System.Int32 ScoreModifierScript::GetScore()
+extern void ScoreModifierScript_GetScore_m11F0A0914CBDB5EE52C105D6D01EC118F8E4B8F0 (void);
+// 0x000000A7 System.Void ScoreModifierScript::.ctor()
+extern void ScoreModifierScript__ctor_m1C10F34AF476AA6111DB4180AB251C53DB848017 (void);
+static Il2CppMethodPointer s_methodPointers[167] = 
+{
+	AudioManagerScript_Awake_m37C0D1EF88F6AB8305893A771CC8421CD19B524B,
+	AudioManagerScript_Play_mBEDA9DF373092AA535F3D569B0F55CDEE7376AB3,
+	AudioManagerScript__ctor_mA566A89543B2EF8D17CBB810E2EF2477E34C3B98,
+	U3CU3Ec__cctor_m6B560DE9437467102B4BD03DD9EC9FE85DE4AB8F,
+	U3CU3Ec__ctor_m6AA71321A4D0CD1155CBF9A09805AF0F2ED83926,
+	U3CU3Ec_U3CAwakeU3Eb__3_0_m86697ADC3DF809FB82CB602427507DFBD3EF7980,
+	U3CU3Ec__DisplayClass4_0__ctor_m8A76C96A1398EC9AC692BAA8BC10687C7E0455B7,
+	U3CU3Ec__DisplayClass4_0_U3CPlayU3Eb__0_m059407D62F52121CF0339F179DCC7470F81C83D2,
+	Sound__ctor_m77B8AC57B05BAFE4B82F0152728047D3EDBE3CCC,
+	ButtonScipt_NextScene_mD607D562E52104A0B24D8E94A5AE388E52293202,
+	ButtonScipt__ctor_m8A99976A686C2B31D2A80D0C0768B31156DE7CBD,
+	DungeonBuilderScript_DungeonBuilder_mC9AB264E0976E3ED09A29BA844839975C62BE29E,
+	DungeonBuilderScript_GetPlannedFloor_mB574399654D28CB886B8C75C95A5FDE6287D5A10,
+	DungeonBuilderScript_BuildFloor_m6AC1C9251FAFFC94550466772CD8995B6D47E628,
+	DungeonBuilderScript_LinkNeighbors_mD01219C8743FCE4414216A7BCF440D1736A3E5B6,
+	DungeonBuilderScript_PlaceEnemies_mF8EE28339C394476E1738F13EDEC04BEB78FE778,
+	DungeonBuilderScript_PlaceTreasures_mAB692E7090B9B88BA3AC9C1AF70C896C8E5E38A3,
+	DungeonBuilderScript__ctor_mCF044209CE491F427401E0BBA1AF0A6798493BDB,
+	DungeonMasterScript_Start_m9F65D68D5BC67409BA65811C55D4189C84D8B445,
+	DungeonMasterScript_ReceivePlayer_m20DC843971CA19CBB72601F80D2B5DDDC72F9FE8,
+	DungeonMasterScript_ReceiveFloor_m08B45CF05FB29D53185A9BF7C71038BEC369687A,
+	DungeonMasterScript_ReceiveSkeletons_mF553663F0FCF1D15CFC63342ED2279B0458D34C6,
+	DungeonMasterScript_ReceiveTreasures_mF802F14A480EC6C7C176DEE60B12AFA396B35EB2,
+	DungeonMasterScript_PlayerDistance_mF6FDD28EAAFA1E0EA0E076B6AC810469BFB6618C,
+	DungeonMasterScript_SkeletonDecisions_mC9CF4444197EAD00DA66CFA099A90CB6ABB0E833,
+	DungeonMasterScript_GetTuileDistance_mEBAB0317D8ECD5091EDAC06E408D4C0AFAEC0423,
+	DungeonMasterScript_GetTuileNeighbors_m7785A27700CCE907267BA02EB2E14D3046F95D63,
+	DungeonMasterScript_ChangeTuileColor_mB8A9B4361F870AB1FB52A5594797CA687B7BADEF,
+	DungeonMasterScript_AllowPlayerMovement_m2D4DAE498824F56BAE556490782CC5850BD2FA89,
+	DungeonMasterScript_ReceiveInput_m566314F9FDDC41F0DA01FD8F9E0BF28C25550616,
+	DungeonMasterScript_CheckMovementLegality_m15D853FA76C5BFCAE157412B00929D363A6620B0,
+	DungeonMasterScript_OrderPlayerMovement_m6D75035A901D2B41DA1D669D56E17AB3AB91A4F3,
+	DungeonMasterScript_OrderPlayerAttack_mEC83F6D94DE3971D0593D698514BD906EFC025EC,
+	DungeonMasterScript_PlayerHasMoved_m1315AB7971EB53F979B626DBEEC74C55D1B8AB96,
+	DungeonMasterScript_EndLevelCheck_m66A384B7EE95329BC53D3FD99E11B2722FA253D3,
+	DungeonMasterScript_PlayerHasAttacked_m9852FB4667CDC24EB9467AC784896698087E9CD0,
+	DungeonMasterScript_AttackTentative_m2D7F18325076B68C6D04010DBE6C2DA88023C085,
+	DungeonMasterScript_TuilesReset_m591E82381E488C798036AAAEE02E9D89C42AD580,
+	DungeonMasterScript_CollectMoney_m6772A1955D5885E6E9C06E3F9D68DECDC4F606D2,
+	DungeonMasterScript_SkeletonsActions_m780BEF904BAD274F2CF869B1FFF2B2291B781AFE,
+	DungeonMasterScript_CheckSkeletonTarget_m8110F638CD68FAE43D0A8C0B4676434287D946EC,
+	DungeonMasterScript_CheckSkeletonRangedTarget_m2938592A7A9B1842B3E59E860F031761AE5013F1,
+	DungeonMasterScript_CheckSkeletonMovement_mD2DC39CB5FB28FEC753AA72CE3AACF531AD82C25,
+	DungeonMasterScript_SkeletonHasActed_m8F3D502E826B55DF54A770238212F7EC20D7D165,
+	DungeonMasterScript_Pause_m7DF69A8A591040FCFF01A397D91EE64122589E24,
+	DungeonMasterScript_ReloadScene_mFCAFA7C6D9A51949CB656C757019003E3B931607,
+	DungeonMasterScript_GetScore_mB23EC2EB39893AE839E01605C73023169FD6964B,
+	DungeonMasterScript_GetPlayerPosition_mFD11B37CE71AEA171476C0D6A09F3E9C093DC838,
+	DungeonMasterScript__ctor_m49E9F503811FC9F43BDCD92D684C228D3CB12903,
+	U3CPauseU3Ed__49__ctor_mDCA4DA32429295F19E08E1B6BFA6531F251B044B,
+	U3CPauseU3Ed__49_System_IDisposable_Dispose_m6CBDABE6FDB050E530F3A2DFAB92D3517C65375B,
+	U3CPauseU3Ed__49_MoveNext_m89C1CAFFF94D512C4EEE5714776C107B89EE5A7F,
+	U3CPauseU3Ed__49_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m90598DA75ECC19B6CD9B550CA03B528EBC082F8F,
+	U3CPauseU3Ed__49_System_Collections_IEnumerator_Reset_m687E84310D3175FADBDD225790357BDFFE42DAE2,
+	U3CPauseU3Ed__49_System_Collections_IEnumerator_get_Current_m1F6F8D582411D5D488EB1CF1DA19DD7CDD7B9996,
+	DungeonPlannerScript_DungeonPlanner_m8996C26BFD8829D7ED28FE15BBDFC09BCD3CA905,
+	DungeonPlannerScript_LevelComplete_m268CB59209A497608181A07129CE486FE6808EE8,
+	DungeonPlannerScript_BasicGenerator_m136DCB1859EAD0DBF79015C6AB3D35639F971B4C,
+	DungeonPlannerScript_HolesGenerator_mB61710BDE629E3A73A27ADB12F8B417C0038774E,
+	DungeonPlannerScript_ProblemSolver_m48EB2124D6782F306FC98EA8A65133813CD5FD43,
+	DungeonPlannerScript_EnemiesGenerator_m5299454DCC2ADDDD1C7872D9BCA5627C0035EA43,
+	DungeonPlannerScript_TreasuresGenerator_m15084E5D1CAC357425C8DDF28550DABF8E0E8748,
+	DungeonPlannerScript_getLevelWidth_m9B0357A21BA207CE67716F86B166FC97D8964F3B,
+	DungeonPlannerScript_getLevelHeight_m8BD8BF111A10A11B9367262D25A2A76839DDA011,
+	DungeonPlannerScript_getPlayerPosition_m4E88E1A978DD92CC4C33288C916583503F924A0F,
+	DungeonPlannerScript_getStairsPosition_mAB0E4480F04C852319E90E638073E10927C37642,
+	DungeonPlannerScript_getHolesPositions_m3A4833AE8E06C0259BB8CD887506F46CF8F0E89D,
+	DungeonPlannerScript_getEnemyPositions_mB2990C68FE36435284EC1603FEDBFF4AB2BAC862,
+	DungeonPlannerScript_getTreasuresPositions_mCDF7E9964ECA34530F6334FAEC1377CBCC6A74C7,
+	DungeonPlannerScript__ctor_m3621469C414CE1CBE97CC71D9E4E919FD82B17C8,
+	DungeonPlannerScript__cctor_mD91B7EA0EFEF2718ADC8CA5E53B6162766736897,
+	FloorScript_Initialize_mA9CF7580467C2B744AD68B365C1C2012AE3719C5,
+	FloorScript_ChangeColor_m0C1DFDD5F265E1D9E10D6DB462C64F2265345B3A,
+	FloorScript_ChangeColor_m1928E01AA9B217D1BEB3C17364F385C7B36812D4,
+	FloorScript_ResetColor_m2C9D3F864B3C8A76620F99F903C36369B02C7E03,
+	FloorScript_AddNeighbor_m8BB65790DBF0DDD4779C7D7FCE28BE05FF6831EA,
+	FloorScript_SetDistance_m613D89803030D7C7D2EACE50D08BFC992FCC78CD,
+	FloorScript_GetDistance_mECA8A6CD603E72720A63910B965F126C37D6F0EF,
+	FloorScript_GetVoisins_m811E923EB94ABADB47F99CA43C96A8F3574A0157,
+	FloorScript__ctor_mA33B4B0548D87934E388C4A4FA1E09E88BDCA884,
+	NULL,
+	ADamageableScript__ctor_mC49155C17876357C3A2C4DC90A0BCF27AF11131F,
+	PlayerInputsScript_Start_mBDE121DB28E0A46D9DC25D98F688B396936E273F,
+	PlayerInputsScript_Update_m58A5CAB97DF3FA7D86445542B5980DB2D65F5DB4,
+	PlayerInputsScript_CalculateMouseVector_m63CEBEC7BE5BB724023267E575748A57E437DC5E,
+	PlayerInputsScript_GiveInput_m1A65ADAFA293D6B6974D42C2705BFDE1BFA27FC7,
+	PlayerInputsScript_ReceiveDungeonMaster_m983557A18C01C185EA23B9CA7FB6A6204115C6B8,
+	PlayerInputsScript__ctor_m5B5903435CEE62891342F011A147832806C61014,
+	PlayerMovementScript_ReceiveDungeonMaster_m64BC354BC225313F4CF5ABD533683C610C01B365,
+	PlayerMovementScript_ReceiveMoveInstruction_m7D285E212330356F664CB43841ED600A8F81EA78,
+	PlayerMovementScript_ReceiveAttackInstruction_m593DC4151E85E1975CE107D30D423AFCB23F5151,
+	PlayerMovementScript_ShouldWeRotate_m489A331571500C4FF939A448D4193873A7A0B58E,
+	PlayerMovementScript_Update_m713981A4E5F649B034B48D1D397760F16C81069F,
+	PlayerMovementScript_ElevationAccordingToDistance_m8CD222D6B5E528A1521164ED5274826F9175804C,
+	PlayerMovementScript__ctor_mA04EAE348CBD314F429CD012CBB0F9D446C499B5,
+	PlayerDamageScript_ReceiveDungeonMaster_m170687E054BF01A4ACB651CA261A2FF1DE48B1C5,
+	PlayerDamageScript_GetDamaged_m9302BE75D37E2E063C85076B14FF79F2E18F05BE,
+	PlayerDamageScript_HelmetChange_m17B31E087722B6E4E2C3BBDEAC2EF7CD61BB8C76,
+	PlayerDamageScript_Celebration_m89DFD8D9F000966160DF9817E07545C0437E42DE,
+	PlayerDamageScript__ctor_m601C516FE61610AE44B0F3D95D9553D38B3E8567,
+	SkeletonDamageableScript_Awake_m87592F92E9267C9C465D3ACCA6CB20E730C4FB26,
+	SkeletonDamageableScript_GetDamaged_m5ADC974253C7674C68D046DDF371CB2F658625C0,
+	SkeletonDamageableScript__ctor_mF227A092EEB0C38C5E8650E64FA7261C77511341,
+	ASkeletonDecisionScript_ReceiveDungeonMaster_m76F46F5FB2241D76D0171564A835EFC790114BAE,
+	NULL,
+	ASkeletonDecisionScript_ResetAnimations_mA115E996FD757D8E1AB352B97FF6F5EADEA3311F,
+	NULL,
+	ASkeletonDecisionScript_MovementProjection_m6CBA18FCF83C508F694079752485F8A9B45D247A,
+	ASkeletonDecisionScript_LaunchAnimation_m6CF817C2AD23C6A953B827A58F7604591CC798EE,
+	ASkeletonDecisionScript_YouWillDie_m27AED32E1E6D1924CB3DA70FB91239EAB5FCC7AB,
+	ASkeletonDecisionScript_GetIntentionAttaque_mF84842D987A3D5DE6396BFDA944D0C665C81FE10,
+	ASkeletonDecisionScript_GetDeathAnimation_m3260CDE0443E36DC59623A2F92A47918C279344B,
+	ASkeletonDecisionScript_GetTarget_mE4D961B412F2A6777A8EEE3368B42CC93B22BBAA,
+	ASkeletonDecisionScript_Roam_m271BEE9DC1CB0C301DBF64DAF8790CEE53694A8C,
+	ASkeletonDecisionScript_CloserToThePlayer_mF19B0A2EE61ED61B6AC5EF16D50F451940AE847A,
+	NULL,
+	ASkeletonDecisionScript__ctor_m76A06AF5C0505312064A3461ED8B9C4A3323A928,
+	ASkeletonMovementScript_ShowIntention_m26FD353DCA356341B83334DA62BDCBC116C3FF6E,
+	ASkeletonMovementScript_ReceiveDungeonMaster_m08B3F3D9D7244D207973C37E486567B7440D8D48,
+	ASkeletonMovementScript_IsAnimatingNothing_mAAAFE32F4A099695C3FF3BA8BBC8F69230B19AF6,
+	ASkeletonMovementScript_IsAnimatingMovement_mF41E1330BDE458F9CEFE5D3A49EB566ED9025C6C,
+	NULL,
+	ASkeletonMovementScript_ShouldWeRotate_m1B86ED8125F02B730F564261827498B464DF6CA6,
+	ASkeletonMovementScript_Update_m89DB9A95D3C0606D04471615B3DB486CD518D821,
+	ASkeletonMovementScript_MovementAnimation_m6A915B93E19109B29F2798FD08B1019963036BD4,
+	ASkeletonMovementScript_ElevationAccordingToDistance_mCE7305658877F08BABA821328F2201B79F072F31,
+	NULL,
+	ASkeletonMovementScript__ctor_m54660F4AD5AE9F81C36D3EFD5742233E116C3663,
+	MeleeDecisionScript_DecisionMaking_m79827B62270ADDDFE1144BC26836D44BCFBE8FA6,
+	MeleeDecisionScript_CommunicateIntent_mE5BAE82F1EA9E091EF86568BC80570DA23FEC400,
+	MeleeDecisionScript_AttackProjection_m8037006F2301F179A09202E8C72F00B3C8334F58,
+	MeleeDecisionScript__ctor_m6ACF4BF9DE0C7695F41136FC870E6FEC76A4F70C,
+	MeleeMovementScript_IsAnimatingAttack_m3D0B662AFC470437C607C12A54389A05D93E9E01,
+	MeleeMovementScript_AttackAnimation_m9695C2AB049C1C060D82E1303ECC04F31D085FDE,
+	MeleeMovementScript__ctor_m404D92E72864F7F037F99ADBB8C2A7679DA81E2C,
+	RangedDecisionScript_DecisionMaking_mCFC8450A1F8051571D2EB995D52C7F9BD46C5E4E,
+	RangedDecisionScript_CommunicateIntent_m5A42B08F6EB1A7E95FEF70F9B2FD6873C9EB2D62,
+	RangedDecisionScript_AttackProjection_m13B7401F967BF6DBF59DADD103FCE4669D20B57A,
+	RangedDecisionScript__ctor_m38846684C64D6CFD9E89607B921584B457BE7482,
+	RangedMovementScript_Awake_m420E79D8CC0D8BB64733D9F0FB7215805AA04EAB,
+	RangedMovementScript_IsAnimatingAttack_m6CFE2ADFD13CC51C6F1BD3107AF2EE1449EE1010,
+	RangedMovementScript_AttackAnimation_m336CCF794721A10E0EAEF757CCC8ABA5156709EA,
+	RangedMovementScript__ctor_m0DEEC0177281DDB1D635907BA9AC54C1817821E1,
+	ParticleScript_Awake_m47240E242AA18D304EA2ACF8078AE14510CEBCEA,
+	ParticleScript_Update_m0441557DCF94E99AD99730030F04034FBCA3E149,
+	ParticleScript__ctor_m11B6C07DE97294DE482C162EEC222D6116F07B93,
+	TreasureScript_Awake_m15DAA9C85E2ECAFC9E4C17752CB681B4945948F9,
+	TreasureScript_TreasureCollected_mDAA6782CF2F12880BB1F61A691A87C66D355BA45,
+	TreasureScript__ctor_m6EBC3E1BA6EAF7A67712F081EC433BCF2C9F15C9,
+	CelebrationScript_ReceiveDungeonMaster_m97CF4852408E2C9D2FD432AB199279BB39A1AB1B,
+	CelebrationScript_Celebration_mB639DD27AD94355CCED0F6FA311587E357A242F0,
+	CelebrationScript_Update_m3EE0E8438DA21D70E67438261995F98C36198B65,
+	CelebrationScript_Pause_m335CEC540CDDF179F864B315F67044B1110CC31D,
+	CelebrationScript__ctor_m8AEE3FB7EC9693B52EC5E1DA7C169C5C802477A6,
+	U3CPauseU3Ed__12__ctor_mA7E797D2BE41CBD005C17BAA1C210859DFBE347F,
+	U3CPauseU3Ed__12_System_IDisposable_Dispose_m01F9E45C6AA059A47E23A9AD5E6ACAB2221B5DBD,
+	U3CPauseU3Ed__12_MoveNext_mFFA53200CD0BC8FAF090A857B857A4629043C478,
+	U3CPauseU3Ed__12_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mE9560CBD21084A42AC3AD1982EE42408B1259B9D,
+	U3CPauseU3Ed__12_System_Collections_IEnumerator_Reset_m326D241857D71EA4BD7415AC73271BB4023816E8,
+	U3CPauseU3Ed__12_System_Collections_IEnumerator_get_Current_m762CC6804F19BDA63FA61AEEFD9529D953BBB104,
+	ScoreModifierScript_Awake_m5326554296B79BF1D98094C2FFD11E483C330F0A,
+	ScoreModifierScript_ChangeScore_m0783CFF52E0892F201A4BCF29716D4099049D81A,
+	ScoreModifierScript_Reset_m9E9918C98D7E68C3313E2850105B9421DA7C6304,
+	ScoreModifierScript_Update_m823F30D2B2AA08FD87F0A22A4ACC981B2EBDD231,
+	ScoreModifierScript_UpdateUI_mFFCCC46536264FF17848988726A4FE503F254681,
+	ScoreModifierScript_GetScore_m11F0A0914CBDB5EE52C105D6D01EC118F8E4B8F0,
+	ScoreModifierScript__ctor_m1C10F34AF476AA6111DB4180AB251C53DB848017,
+};
+static const int32_t s_InvokerIndices[167] = 
+{
+	1506,
+	1260,
+	1506,
+	2365,
+	1506,
+	1091,
+	1506,
+	1091,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	770,
+	467,
+	1260,
+	1260,
+	1506,
+	1506,
+	517,
+	555,
+	412,
+	1277,
+	1297,
+	534,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	787,
+	1506,
+	1506,
+	1506,
+	1128,
+	1128,
+	617,
+	1506,
+	1464,
+	1506,
+	1452,
+	1503,
+	1506,
+	1250,
+	1506,
+	1484,
+	1464,
+	1506,
+	1464,
+	2365,
+	2365,
+	2365,
+	2365,
+	2365,
+	2365,
+	2365,
+	2345,
+	2345,
+	2362,
+	2362,
+	2350,
+	2350,
+	2350,
+	1506,
+	2365,
+	719,
+	1222,
+	1277,
+	1506,
+	1295,
+	980,
+	1452,
+	1464,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1260,
+	1506,
+	1260,
+	1297,
+	1297,
+	1506,
+	1506,
+	1486,
+	1506,
+	764,
+	1506,
+	1107,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1260,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1484,
+	1484,
+	1503,
+	1506,
+	1506,
+	1506,
+	1506,
+	1277,
+	1260,
+	1506,
+	1297,
+	1297,
+	1506,
+	1506,
+	1506,
+	1486,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1297,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1297,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	1506,
+	476,
+	1506,
+	1506,
+	1464,
+	1506,
+	1250,
+	1506,
+	1484,
+	1464,
+	1506,
+	1464,
+	1506,
+	1250,
+	1506,
+	1506,
+	1506,
+	1452,
+	1506,
+};
+extern const CustomAttributesCacheGenerator g_ScritpsAssembly_AttributeGenerators[];
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_ScritpsAssembly_CodeGenModule;
+const Il2CppCodeGenModule g_ScritpsAssembly_CodeGenModule = 
+{
+	"ScritpsAssembly.dll",
+	167,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	g_ScritpsAssembly_AttributeGenerators,
+	NULL, // module initializer,
+	NULL,
+	NULL,
+	NULL,
+};
