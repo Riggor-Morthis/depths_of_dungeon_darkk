@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3036453116420989790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3036453116420989789}
+  - component: {fileID: 3036453116420989788}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3036453116420989789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036453116420989790}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3036453116420989788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036453116420989790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3f9fa3a89ce9645b8c7b3e2e41c1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Music
+    clip: {fileID: 8300000, guid: 444a4509834529b488aa65dfd325fed4, type: 3}
+    volume: 0.25
+    source: {fileID: 0}
+  - name: Coins
+    clip: {fileID: 8300000, guid: 5dc7b32adef70a8449a73e1bd3d2033a, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: EnemyDeath
+    clip: {fileID: 8300000, guid: 8f23df6a5af864d43b41fc3d241a2019, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Error
+    clip: {fileID: 8300000, guid: 7b11b18e08c855b42a3584f86546f242, type: 3}
+    volume: 0.5
+    source: {fileID: 0}
+  - name: Helmet
+    clip: {fileID: 8300000, guid: c98883a5c7f83b341ba4029d40a96103, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Magic
+    clip: {fileID: 8300000, guid: 865687fd8b5f9ed46b699018510b593e, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Melee
+    clip: {fileID: 8300000, guid: 05fe56bdde3d58e4eb063a0719d0b6b8, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: PlayerHurt
+    clip: {fileID: 8300000, guid: 73fd578c3868d9d4699f7b60cc7a392a, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Step
+    clip: {fileID: 8300000, guid: 3c02ac24c593fb544b25f3ca0e4c4d05, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Triumph
+    clip: {fileID: 8300000, guid: ad115d642ab1bf547b2cdb73605fc41f, type: 3}
+    volume: 1
+    source: {fileID: 0}
